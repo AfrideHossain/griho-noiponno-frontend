@@ -40,7 +40,7 @@ const Banner = () => {
               rotate: 0,
               transition: {
                 delay: 0.9,
-                duration: 2,
+                duration: 1.5,
                 repeat: Infinity,
                 repeatType: "reverse",
               },
@@ -54,7 +54,7 @@ const Banner = () => {
               rotate: 0,
               transition: {
                 delay: 0.6,
-                duration: 2,
+                duration: 1.5,
                 repeat: Infinity,
                 repeatType: "reverse",
               },
@@ -68,7 +68,7 @@ const Banner = () => {
               rotate: 0,
               transition: {
                 delay: 0.3,
-                duration: 2,
+                duration: 1.5,
                 repeat: Infinity,
                 repeatType: "reverse",
               },

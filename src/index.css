@@ -25,6 +25,10 @@ body {
   z-index: 1;
   background: #060113;
   overflow: hidden;
+  @apply scroll-smooth snap-y;
+
+  /* font-size: calc(16px + 6 * ((100vw - 320px) / 680)); */
+
   /* background: linear-gradient(45deg, #060113, #0c0324); */
 }
 

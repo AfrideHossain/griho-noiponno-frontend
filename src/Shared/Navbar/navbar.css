@@ -1,0 +1,28 @@
+.navbar {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  @apply text-white w-full h-16 border-b border-gray-600 flex
+    items-center justify-between px-4 rounded-md;
+}
+
+.siteName {
+  @apply flex-grow;
+}
+.siteName h1 {
+  @apply text-2xl text-white font-semibold;
+}
+.navLinks {
+  @apply flex-grow;
+}
+.navLinks ul {
+  @apply flex gap-4 items-center list-none;
+}
+.navLinks li {
+  @apply p-1;
+}
+.nav-icon {
+  @apply w-7 h-7;
+}
+.profile-section {
+  @apply flex flex-grow justify-end gap-4;
+}
