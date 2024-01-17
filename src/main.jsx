@@ -6,6 +6,11 @@ import router from "./routes/router";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <div className="section-main">
+      <div className="circle"></div>
+      <div className="circle"></div>
+      {/* <div className="circle"></div> */}
+      <RouterProvider router={router} />
+    </div>
   </React.StrictMode>
 );
