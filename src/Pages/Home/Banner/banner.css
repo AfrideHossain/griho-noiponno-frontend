@@ -1,6 +1,8 @@
 .banner {
-  width: 100%;
-  height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  /* width: 100%;
+  height: 100vh; */
   @apply h-screen flex items-center gap-5 px-4;
 }
 .bannerTextsSection {
@@ -23,7 +25,7 @@
   @apply text-black bg-white -top-2 -left-2;
 }
 .bannerImgSection {
-  @apply w-full h-full flex justify-between items-center relative;
+  @apply w-full h-full flex justify-between items-center relative z-[0];
 }
 img {
   width: 180px;

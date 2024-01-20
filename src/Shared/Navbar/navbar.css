@@ -1,18 +1,26 @@
 .navbar {
-  background: rgba(255, 255, 255, 0.08);
+  /* background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.01)
+  ); */
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  @apply text-white w-full h-16 border-b border-gray-600 flex
-    items-center justify-between px-4 rounded-md;
+  @apply text-white ;
+}
+/* 
+.siteName {
+  @apply w-full;
 }
 
-.siteName {
-  @apply flex-grow;
+.siteName img {
+  @apply border border-red-400 max-w-10 max-h-10 overflow-hidden;
 }
 .siteName h1 {
   @apply text-2xl text-white font-semibold;
 }
 .navLinks {
-  @apply flex-grow;
+  @apply w-full;
 }
 .navLinks ul {
   @apply flex gap-4 items-center list-none;
@@ -24,5 +32,5 @@
   @apply w-7 h-7;
 }
 .profile-section {
-  @apply flex flex-grow justify-end gap-4;
-}
+  @apply flex w-full justify-end gap-4;
+} */
