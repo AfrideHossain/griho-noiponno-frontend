@@ -1,0 +1,12 @@
+.facilities {
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.facilities-items {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.block-head {
+  @apply text-2xl font-semibold;
+}

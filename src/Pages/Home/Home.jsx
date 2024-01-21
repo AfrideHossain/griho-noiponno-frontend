@@ -1,11 +1,13 @@
 import Banner from "./Banner/Banner";
-import PopularItems from "./PopularItems/PopularItems";
+import Facilities from "./Facilities/Facilities";
+// import PopularItems from "./PopularItems/PopularItems";
 
 const Home = () => {
   return (
     <>
       <Banner />
-      <PopularItems />
+      {/* <PopularItems /> */}
+      <Facilities />
     </>
   );
 };
