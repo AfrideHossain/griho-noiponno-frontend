@@ -7,7 +7,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   line-height: normal;
   font-weight: 400;
@@ -20,7 +19,7 @@
 body {
   z-index: 1;
   background: #060113;
-  overflow: hidden;
+  /* overflow: hidden; */
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
   @apply scroll-smooth snap-y;
@@ -35,7 +34,8 @@ body {
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  background: rgb(0, 24, 70);
+  background: rgb(200, 0, 226);
+  /* background: rgb(0, 24, 70); */
   z-index: 0;
   filter: blur(150px);
   /* display: none; */
@@ -48,10 +48,10 @@ body {
   bottom: -50px;
   right: -50px;
 }
-.circle:nth-child(3) {
+/* .circle:nth-child(3) {
   bottom: 100px;
   left: calc(100vw - 60%);
-}
+} */
 /* .section-main {
   max-width: 1280px;
   margin: 0 auto;

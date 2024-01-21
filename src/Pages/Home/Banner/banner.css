@@ -18,12 +18,12 @@
   z-index: 0;
   @apply text-white border px-10 py-4 rounded-full relative transition-all duration-500;
 }
-.bannerTextsSection button:hover {
+/* .bannerTextsSection button:hover {
   top: -8px;
   left: -8px;
   box-shadow: 5px 5px 0 rgb(26, 27, 43), 8px 8px 0 rgb(61, 32, 32);
   @apply text-black bg-white -top-2 -left-2;
-}
+} */
 .bannerImgSection {
   @apply w-full h-full flex justify-between items-center relative z-[0];
 }

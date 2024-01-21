@@ -30,7 +30,7 @@ const Banner = () => {
             ad possimus autem maiores aspernatur quas inventore a unde
             voluptatem quidem libero?
           </p>
-          <button>Shop Now</button>
+          <button className="btn btn-primary">Shop Now</button>
         </div>
         <div className="bannerImgSection">
           <motion.img
