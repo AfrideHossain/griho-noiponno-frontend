@@ -1,5 +1,3 @@
-import Heading from "../../../Shared/Heading/Heading";
-
 // importing icons from react icons
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { MdCurrencyExchange } from "react-icons/md";
