@@ -1,4 +1,6 @@
 import "./banner.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // importing framer motion
 import { motion } from "framer-motion";
@@ -18,11 +20,14 @@ import { motion } from "framer-motion";
 //   hover: {},
 // };
 
+// Initiate Aos
+AOS.init();
+
 const Banner = () => {
   return (
     <>
       <div className="banner">
-        <div className="bannerTextsSection">
+        <div className="bannerTextsSection" data-aos="fade-right">
           <h1>Your Home Interior Solution</h1>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam
@@ -32,7 +37,7 @@ const Banner = () => {
           </p>
           <button className="btn btn-primary">Shop Now</button>
         </div>
-        <div className="bannerImgSection">
+        <div className="bannerImgSection" data-aos="fade-left">
           <motion.img
             src="https://i.ibb.co/x2Y3M4k/1521.jpg"
             animate={{
