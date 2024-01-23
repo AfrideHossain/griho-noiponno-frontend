@@ -27,17 +27,17 @@
 .bannerImgSection {
   @apply w-full h-full flex justify-between items-center relative z-[0];
 }
-img {
+.bannerImgSection img {
   width: 180px;
   height: 250px;
   @apply relative rounded-md object-cover cursor-pointer;
 }
-img:nth-child(1) {
+.bannerImgSection img:nth-child(1) {
   top: 100px;
 }
-img:nth-child(2) {
+.bannerImgSection img:nth-child(2) {
   top: -100px;
 }
-img:nth-child(3) {
+.bannerImgSection img:nth-child(3) {
   top: 100px;
 }
