@@ -1,11 +1,12 @@
 .facilities {
-  width: 1280px;
+  /* width: 1280px; */
   margin: 0 auto;
+  @apply md:w-[1280px] w-full p-4;
 }
 
 .facilities-items {
   background: rgba(255, 255, 255, 0.09);
-  @apply border border-gray-700
+  @apply border border-gray-700;
 }
 
 .block-head {
@@ -13,5 +14,5 @@
 }
 
 .block-text {
-  @apply text-base font-medium;
+  @apply text-sm md:text-base font-normal;
 }

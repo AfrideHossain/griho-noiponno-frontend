@@ -34,7 +34,7 @@ body {
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  background: rgb(200, 0, 226);
+  background: rgb(121, 0, 192);
   /* background: rgb(0, 24, 70); */
   z-index: 0;
   filter: blur(150px);
@@ -60,4 +60,8 @@ section {
   border-bottom: 0.5px solid #b8b8b8;
 
   @apply px-4;
+}
+
+.btn-primary {
+  @apply border bg-blue-500 border-blue-500 hover:bg-blue-700 hover:border-blue-700;
 }
