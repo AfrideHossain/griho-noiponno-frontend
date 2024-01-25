@@ -19,7 +19,7 @@ const Navitems = (
 const Navbar = () => {
   return (
     <>
-      <div className="navbar glass ">
+      <div className="navbar glass relative z-10">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

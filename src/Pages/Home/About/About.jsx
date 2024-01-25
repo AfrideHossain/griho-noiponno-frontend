@@ -9,9 +9,10 @@ const About = () => {
           src="https://i.ibb.co/mGFfjY6/1521-removebg-preview-1.png"
           className="w-96 h-96 object-cover"
           alt=""
+          data-aos="zoom-in"
         />
       </div>
-      <div className="w-full">
+      <div className="w-full" data-aos="fade-left">
         <h1 className="text-2xl md:text-4xl font-bold mb-8 text-white">
           We Are One Of The Biggest Furniture Brand
         </h1>

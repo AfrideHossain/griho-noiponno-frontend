@@ -3,7 +3,7 @@
   margin: 0 auto;
   /* width: 100%;
   height: 100vh; */
-  @apply md:h-screen h-lvh flex md:flex-row flex-col items-center px-4 md:py-0 py-4 md:gap-5 gap-10;
+  @apply md:h-screen h-lvh flex md:flex-row flex-col items-center px-4 md:py-0 py-4 md:gap-5 gap-10 relative;
 }
 .bannerTextsSection {
   @apply w-full md:mb-0;

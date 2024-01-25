@@ -1,32 +1,12 @@
 import "./banner.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 // importing framer motion
 import { motion } from "framer-motion";
 
-// const variants = {
-//   animate: {
-//     y: [-20, 20],
-//     rotate: 0,
-//     transition: {
-//       delay,
-//       duration: 2,
-//       repeat: Infinity,
-//       // repeatDelay: 0.2,
-//       repeatType: "reverse",
-//     },
-//   },
-//   hover: {},
-// };
-
-// Initiate Aos
-AOS.init();
-
 const Banner = () => {
   return (
     <>
-      <div className="banner">
+      <div className="banner z-1">
         <div className="bannerTextsSection" data-aos="fade-right">
           <h1>Your Home Interior Solution</h1>
           <p>

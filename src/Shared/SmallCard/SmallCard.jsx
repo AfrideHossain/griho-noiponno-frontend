@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 const SmallCard = () => {
   return (
-    <div className="w-fit rounded-md overflow-hidden">
+    <div className="w-fit rounded-md overflow-hidden" data-aos="flip-right">
       <div className="overflow-hidden">
         <motion.img
           src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
