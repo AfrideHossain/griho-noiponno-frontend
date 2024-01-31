@@ -11,10 +11,10 @@ AOS.init();
 
 const HomeLayout = () => {
   return (
-    <div className="relative max-w-screen overflow-hidden">
+    <div className="relative max-w-screen">
       <Navbar />
-      <div className="circle"></div>
-      <div className="circle"></div>
+      {/* <div className="circle"></div>
+      <div className="circle"></div> */}
       <Outlet />
       <Footer />
     </div>
