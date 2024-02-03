@@ -25,7 +25,9 @@ const ProductCard = () => {
           <span>%</span>
         </p>
         <div className="card-actions justify-between">
-          <Link className="btn btn-outline">View Details</Link>{" "}
+          <Link className="btn btn-outline" to={"/product"}>
+            View Details
+          </Link>
           <button className="btn btn-primary">Add To Cart</button>
         </div>
       </div>
