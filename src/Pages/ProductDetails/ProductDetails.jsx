@@ -1,5 +1,6 @@
 import { CiStar, CiHeart } from "react-icons/ci";
 import { PiPaperPlaneTiltBold } from "react-icons/pi";
+import ReviewCard from "./ReviewCard/ReviewCard";
 
 const ProductDetails = () => {
   return (
@@ -32,6 +33,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      {/* review input section */}
       <div className="mt-20">
         <div className="w-full">
           <textarea
@@ -40,11 +42,18 @@ const ProductDetails = () => {
             className="w-full h-32 p-4 font-medium rounded-md resize-none border border-gray-500 outline-none bg-slate-600 bg-opacity-40"
             placeholder="Write a review for this specific product"
           ></textarea>
-          <button className="btn btn-primary float-right mt-5 items-center">
-            Send review
-            <PiPaperPlaneTiltBold className="w-6 h-6" />
-          </button>
+          <div className="w-full mt-5 flex justify-end">
+            <button className="btn btn-primary items-center">
+              Send review
+              <PiPaperPlaneTiltBold className="w-6 h-6" />
+            </button>
+          </div>
         </div>
+      </div>
+      {/* All review section */}
+      <div className="mt-20">
+        <h1 className="text-xl font-bold mb-10">Previous Reviews</h1>
+        <ReviewCard />
       </div>
     </div>
   );
