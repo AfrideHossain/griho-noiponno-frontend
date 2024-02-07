@@ -5,6 +5,8 @@ import Shop from "../Pages/Shop/Shop";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import ErrorElement from "../Shared/ErrorElement/ErrorElement";
 import Whatsnew from "../temp/components/Whatsnew/Whatsnew";
+import AuthLayout from "../Layout/Auth/AuthLayout";
+import Login from "../Pages/Auth/Login/Login";
 
 const router = createBrowserRouter([
   {
@@ -17,20 +19,35 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/shop",
+        path: "shop",
         element: <Shop />,
       },
       {
-        path: "/product/",
+        path: "product",
         element: <ProductDetails />,
       },
       {
-        path: "/error",
+        path: "error",
         element: <ErrorElement />,
       },
       {
-        path: "/whatsnew",
+        path: "whatsnew",
         element: <Whatsnew />,
+      },
+    ],
+  },
+  {
+    path: "auth",
+    element: <AuthLayout />,
+    errorElement: <ErrorElement />,
+    children: [
+      {
+        path: "",
+        element: <ErrorElement />,
+      },
+      {
+        path: "login",
+        element: <Login />,
       },
     ],
   },

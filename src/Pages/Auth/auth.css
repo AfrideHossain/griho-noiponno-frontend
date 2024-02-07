@@ -1,0 +1,12 @@
+.form {
+  @apply md:w-[520px];
+}
+.input-section {
+  @apply w-full h-10 bg-slate-400 rounded-md;
+}
+input {
+  @apply bg-transparent border-none outline-none w-full h-full text-black font-medium px-3;
+}
+input::placeholder {
+  @apply text-gray-500 font-medium;
+}
