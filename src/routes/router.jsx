@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import Shop from "../Pages/Shop/Shop";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import ErrorElement from "../Shared/ErrorElement/ErrorElement";
+import Whatsnew from "../temp/components/Whatsnew/Whatsnew";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/error",
         element: <ErrorElement />,
+      },
+      {
+        path: "/whatsnew",
+        element: <Whatsnew />,
       },
     ],
   },

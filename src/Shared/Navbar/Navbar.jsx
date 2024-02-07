@@ -13,6 +13,11 @@ const Navitems = (
     <li>
       <Link to="/faq">FAQ</Link>
     </li>
+    <li>
+      <Link to="/whatsnew" className="link link-primary">
+        What{"'"}s New
+      </Link>
+    </li>
   </>
 );
 
