@@ -14,7 +14,7 @@ input::placeholder {
 .form-side-image-section {
   width: 100%;
   height: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .form-image {
   width: 100%;
