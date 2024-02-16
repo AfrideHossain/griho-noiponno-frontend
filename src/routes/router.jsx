@@ -8,6 +8,7 @@ import Whatsnew from "../temp/components/Whatsnew/Whatsnew";
 import AuthLayout from "../Layout/Auth/AuthLayout";
 import Login from "../Pages/Auth/Login/Login";
 import SignUp from "../Pages/Auth/SignUp/SignUp";
+import DashboardLayout from "../Layout/Dashboadrd/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,20 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp />,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <DashboardLayout />,
+    errorElement: <ErrorElement />,
+    children: [
+      {
+        path: "",
+        element: <ErrorElement />,
+      },
+      {
+        path: "user",
       },
     ],
   },
