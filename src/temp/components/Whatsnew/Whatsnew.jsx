@@ -3,9 +3,10 @@ import { SlInfo } from "react-icons/sl";
 
 // importing css
 import "./Whatsnew.css";
+import { Link } from "react-router-dom";
 
 // date string
-const dateString = new Date("2024-02-06");
+const dateString = new Date("2024-02-13");
 
 const Whatsnew = () => {
   return (
@@ -55,13 +56,20 @@ const Whatsnew = () => {
         {/* list section */}
         <div className="flex flex-col items-center">
           <ol type="1" className="list-disc space-y-2 mt-10">
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+            <li>
+              Sign in page added{" "}
+              <Link className="link link-primary" to="/auth/signin">
+                Click here
+              </Link>{" "}
+              to visit.
+            </li>
+            <li>
+              Sign up page added{" "}
+              <Link className="link link-primary" to="/auth/signup">
+                Click here
+              </Link>{" "}
+              to visit.
+            </li>
           </ol>
         </div>
       </div>

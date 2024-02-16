@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "../auth.css";
-const Login = () => {
+
+const SignUp = () => {
   return (
     <div className="relative h-screen overflow-hidden">
       <img
@@ -29,8 +30,8 @@ const Login = () => {
               </h3>
             </div>
             <div className="w-full mb-5">
-              <h2 className="text-3xl md:text-4xl font-medium">Hello, </h2>
-              <h1 className="text-5xl md:text-6xl font-extrabold">Welcome!</h1>
+              <h2 className="text-3xl md:text-4xl font-medium">Join us </h2>
+              <h1 className="text-5xl md:text-6xl font-extrabold">NOW!</h1>
             </div>
             <form className="form w-full space-y-3">
               <div className="input-section">
@@ -47,9 +48,9 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary w-32 rounded-md"
                 >
-                  Sign in
+                  Sign up
                 </button>
-                <Link className="btn btn-outline w-32 rounded-md">Sign up</Link>
+                <Link className="btn btn-outline w-32 rounded-md">Sign in</Link>
               </div>
             </form>
             {/* horizontal line */}
@@ -75,4 +76,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

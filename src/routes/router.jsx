@@ -7,6 +7,7 @@ import ErrorElement from "../Shared/ErrorElement/ErrorElement";
 import Whatsnew from "../temp/components/Whatsnew/Whatsnew";
 import AuthLayout from "../Layout/Auth/AuthLayout";
 import Login from "../Pages/Auth/Login/Login";
+import SignUp from "../Pages/Auth/SignUp/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -46,8 +47,12 @@ const router = createBrowserRouter([
         element: <ErrorElement />,
       },
       {
-        path: "login",
+        path: "signin",
         element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
       },
     ],
   },
