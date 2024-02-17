@@ -9,6 +9,7 @@ import AuthLayout from "../Layout/Auth/AuthLayout";
 import Login from "../Pages/Auth/Login/Login";
 import SignUp from "../Pages/Auth/SignUp/SignUp";
 import DashboardLayout from "../Layout/Dashboadrd/DashboardLayout";
+import User from "../Pages/User/User";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: "user",
+        element: <User />,
       },
     ],
   },
