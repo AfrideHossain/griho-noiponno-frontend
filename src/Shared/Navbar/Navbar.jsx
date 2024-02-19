@@ -110,7 +110,7 @@ const Navbar = () => {
                     className="menu menu-sm dropdown-content mt-3 z-[2] p-2 shadow bg-base-100 rounded-box w-52 text-white"
                   >
                     <li>
-                      <Link to={"/dashboard/"} className="justify-between">
+                      <Link to={"/dashboard/user"} className="justify-between">
                         Profile
                       </Link>
                     </li>
