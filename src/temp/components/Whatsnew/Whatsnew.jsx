@@ -59,6 +59,13 @@ const Whatsnew = () => {
             <li>Navigation bar modified and side bar added.</li>
             <li>User dashboard route Modified</li>
             <li>
+              User authentication page added{" "}
+              <Link className="link link-primary" to="/auth/signin">
+                Click here
+              </Link>{" "}
+              to visit.
+            </li>
+            <li>
               User profile page added{" "}
               <Link className="link link-primary" to="/dashboard/user">
                 Click here

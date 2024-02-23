@@ -50,7 +50,12 @@ const SignUp = () => {
                 >
                   Sign up
                 </button>
-                <Link className="btn btn-outline w-32 rounded-md">Sign in</Link>
+                <Link
+                  className="btn btn-outline w-32 rounded-md"
+                  to="/auth/signin"
+                >
+                  Sign in
+                </Link>
               </div>
             </form>
             {/* horizontal line */}

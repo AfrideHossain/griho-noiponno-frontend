@@ -32,7 +32,7 @@
 }
 
 .socialLinks {
-  @apply w-full mt-10 px-0;
+  @apply w-full mt-5 md:mt-10 px-0;
 }
 .socialLinks tr {
   @apply border-0 border-gray-400;

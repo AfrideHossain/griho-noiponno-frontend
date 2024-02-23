@@ -28,7 +28,7 @@ const Navbar = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <div className="w-full navbar bg-base-300">
+          <div className="w-full navbar z-10 bg-base-300">
             <div className="navbar-start flex-grow">
               <div className="flex-none lg:hidden">
                 <label
@@ -76,10 +76,7 @@ const Navbar = () => {
                       <span className="badge badge-sm indicator-item">8</span>
                     </div>
                   </div>
-                  <div
-                    tabIndex={0}
-                    className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-                  >
+                  <div className="mt-3 z-[999] card card-compact dropdown-content w-52 bg-base-100 shadow">
                     <div className="card-body">
                       <span className="font-bold text-lg">8 Items</span>
                       <span className="text-info">Subtotal: $999</span>

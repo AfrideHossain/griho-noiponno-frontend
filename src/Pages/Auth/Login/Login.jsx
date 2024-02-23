@@ -49,7 +49,12 @@ const Login = () => {
                 >
                   Sign in
                 </button>
-                <Link className="btn btn-outline w-32 rounded-md">Sign up</Link>
+                <Link
+                  className="btn btn-outline w-32 rounded-md"
+                  to="/auth/signup"
+                >
+                  Sign up
+                </Link>
               </div>
             </form>
             {/* horizontal line */}

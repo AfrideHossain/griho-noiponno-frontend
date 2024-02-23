@@ -32,10 +32,10 @@ const User = () => {
           </ul>
         </div>
         {/* profile information */}
-        <div className="w-full grid grid-cols-3 gap-3">
+        <div className="w-full grid md:grid-cols-3 gap-3">
           {/* profile picture and social media section */}
-          <div className="space-y-3 ">
-            <div className="infoCard flex flex-col items-center h-full">
+          <div className="space-y-3">
+            <div className="infoCard flex flex-col items-center h-full md:h-full w-full">
               {/* user's profile picture */}
               <LazyLoadImage
                 className="w-36 h-36 object-cover aspect-square rounded-full"
@@ -57,46 +57,48 @@ const User = () => {
                     Change Picture
                   </button>
                 </div>
-                {/* social links */}
-                <div className="socialLinks">
-                  <h1 className="mb-5 !text-2xl">Social Links</h1>
-                  <table className="table">
-                    <tbody>
-                      {/* Facebook */}
-                      <tr>
-                        <td>
-                          <p>
-                            <BsFacebook className="w-5 h-5" /> Facebook
-                          </p>
-                        </td>
-                        <td>@{"emmastone"}</td>
-                      </tr>
-                      {/* Instagram*/}
-                      <tr>
-                        <td>
-                          <p>
-                            <FaInstagram className="w-5 h-5" /> Instagram
-                          </p>
-                        </td>
-                        <td>@{"emmastone"}</td>
-                      </tr>
-                      {/* Twitter */}
-                      <tr>
-                        <td>
-                          <p>
-                            <FaTwitter className="w-5 h-5" /> Twitter
-                          </p>
-                        </td>
-                        <td>@{"emmastone"}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              </div>
+              {/* social links */}
+              <div className="socialLinks overflow-x-auto">
+                <h1 className="mb-5 !text-2xl border-b border-gray-400 pb-3">
+                  Social Links
+                </h1>
+                <table className="table">
+                  <tbody>
+                    {/* Facebook */}
+                    <tr>
+                      <td>
+                        <p>
+                          <BsFacebook className="w-5 h-5" /> Facebook
+                        </p>
+                      </td>
+                      <td>@{"emmastone"}</td>
+                    </tr>
+                    {/* Instagram*/}
+                    <tr>
+                      <td>
+                        <p>
+                          <FaInstagram className="w-5 h-5" /> Instagram
+                        </p>
+                      </td>
+                      <td>@{"emmastone"}</td>
+                    </tr>
+                    {/* Twitter */}
+                    <tr>
+                      <td>
+                        <p>
+                          <FaTwitter className="w-5 h-5" /> Twitter
+                        </p>
+                      </td>
+                      <td>@{"emmastone"}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
           {/* user's other information section  */}
-          <div className="col-span-2 h-full">
+          <div className="md:col-span-2 h-full">
             <div className="infoCard overflow-x-auto">
               <table className="table infoTable">
                 <tbody>
@@ -138,7 +140,7 @@ const User = () => {
                 </tbody>
               </table>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-3">
+            <div className="grid md:grid-cols-2 gap-3 mt-3">
               <div className="infoCard">
                 <h1 className="mb-5">Shipping Address</h1>
                 <table className="table infoTable">
