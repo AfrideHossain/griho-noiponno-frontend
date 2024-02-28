@@ -10,6 +10,7 @@ import Login from "../Pages/Auth/Login/Login";
 import SignUp from "../Pages/Auth/SignUp/SignUp";
 import DashboardLayout from "../Layout/Dashboadrd/DashboardLayout";
 import User from "../Pages/User/User";
+import Admin from "../Pages/Admin/Admin";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,17 @@ const router = createBrowserRouter([
       {
         path: "user",
         element: <User />,
+      },
+    ],
+  },
+  {
+    path: "admin",
+    element: <DashboardLayout />,
+    errorElement: <ErrorElement />,
+    children: [
+      {
+        path: "",
+        element: <Admin />,
       },
     ],
   },
