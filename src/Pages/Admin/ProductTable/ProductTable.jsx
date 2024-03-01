@@ -7,8 +7,10 @@ import { HiX } from "react-icons/hi";
 const ProductTable = ({ products, onDelete, onEdit, loading }) => {
   const [formData, setFormData] = useState({
     name: "",
-    price: "",
     description: "",
+    price: "",
+    category: "",
+    stock: "",
     image: "",
   });
 
@@ -40,11 +42,6 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                 return (
                   <tr key={indx}>
                     <td>
-                      {/* <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-10 h-10 object-cover rounded-lg"
-                      /> */}
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
@@ -105,7 +102,7 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
           >
             <div className="flex flex-col space-y-2">
               <label htmlFor="name" className="text-sm text-gray-300">
-                Name
+                Product Name
               </label>
               <input
                 type="text"
@@ -114,20 +111,7 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                 className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
                 value={formData.name}
                 onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="flex flex-col space-y-2">
-              <label htmlFor="price" className="text-sm text-gray-300">
-                Price
-              </label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-                value={formData.price}
-                onChange={handleChange}
+                placeholder="Product Name"
                 required
               />
             </div>
@@ -141,8 +125,57 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                 className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
                 value={formData.description}
                 onChange={handleChange}
+                placeholder="Write a description for your product."
                 required
               ></textarea>
+            </div>
+
+            <div className="join gap-4">
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="category" className="text-sm text-gray-300">
+                  Category
+                </label>
+                <input
+                  type="text"
+                  id="category"
+                  name="category"
+                  className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  value={formData.category}
+                  onChange={handleChange}
+                  placeholder="Category"
+                  required
+                />
+              </div>
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="stock" className="text-sm text-gray-300">
+                  Stock
+                </label>
+                <input
+                  type="number"
+                  id="stock"
+                  name="stock"
+                  className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  value={formData.stock}
+                  onChange={handleChange}
+                  placeholder="Stock"
+                  required
+                />
+              </div>
+            </div>
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="price" className="text-sm text-gray-300">
+                Price
+              </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
+                value={formData.price}
+                onChange={handleChange}
+                placeholder="Price"
+                required
+              />
             </div>
             <div className="flex flex-col space-y-2">
               <label htmlFor="image" className="text-sm text-gray-300">
@@ -155,6 +188,7 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                 className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
                 value={formData.image}
                 onChange={handleChange}
+                placeholder="Image URL"
                 required
               />
             </div>
