@@ -11,6 +11,8 @@ import SignUp from "../Pages/Auth/SignUp/SignUp";
 import DashboardLayout from "../Layout/Dashboadrd/DashboardLayout";
 import User from "../Pages/User/User";
 import Admin from "../Pages/Admin/Admin";
+import AddProduct from "../Pages/Admin/AddProduct/AddProduct";
+import Cart from "../Pages/User/Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +74,10 @@ const router = createBrowserRouter([
         path: "user",
         element: <User />,
       },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
     ],
   },
   {
@@ -82,6 +88,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Admin />,
+      },
+      {
+        path: "addproduct",
+        element: <AddProduct />,
       },
     ],
   },

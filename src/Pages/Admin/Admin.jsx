@@ -1,3 +1,4 @@
+import OrderList from "./OrderList/OrderList";
 import ProductTable from "./ProductTable/ProductTable";
 
 const Admin = () => {
@@ -27,13 +28,15 @@ const Admin = () => {
       image: "https://via.placeholder.com/150",
       description: "Noise-canceling headphones for immersive listening.",
     },
-    // Add more products as needed
   ];
 
   return (
-    <>
+    <div className="w-full min-h-screen">
+      <h1 className="text-2xl py-3 font-bold">Product List</h1>
       <ProductTable products={products} />
-    </>
+      <h1 className="text-2xl py-3 font-bold">New Order Request</h1>
+      <OrderList />
+    </div>
   );
 };
 
