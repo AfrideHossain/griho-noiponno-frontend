@@ -1,7 +1,34 @@
 import { Link } from "react-router-dom";
+
+// import react hook form
+import { useForm } from "react-hook-form";
+
+// import yup resolver for validation
+import { yupResolver } from "@hookform/resolvers/yup";
 import "../auth.css";
+import ValidationSchema from "../validator/YupUniversalValidator";
+import useContextHook from "../../../hooks/useContextHook";
 
 const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(ValidationSchema) });
+
+  // destructure sign up functions  from usecontexthook
+  const { signUpWithEmailAndPass } = useContextHook();
+  //  submit handler to send data to the server
+  const submitHandler = (credentials) => {
+    const { email, password } = credentials;
+    signUpWithEmailAndPass(email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="relative h-screen overflow-hidden">
       <img
@@ -33,25 +60,40 @@ const SignUp = () => {
               <h2 className="text-3xl md:text-4xl font-medium">Join us </h2>
               <h1 className="text-5xl md:text-6xl font-extrabold">NOW!</h1>
             </div>
-            <form className="form w-full space-y-3">
+            <form
+              className="form w-auto space-y-3"
+              onSubmit={handleSubmit(submitHandler)}
+            >
               <div className="input-section">
-                <input type="text" placeholder="Username (E.g: johndoe)" />
+                <input
+                  type="text"
+                  placeholder="Username (E.g: johndoe)"
+                  {...register("username")}
+                />
               </div>
               <div className="input-section">
                 <input
                   type="email"
                   placeholder="email (E.g: johndoe@email.com)"
+                  {...register("email")}
+                />
+              </div>
+              <div className="input-section">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  {...register("password")}
                 />
               </div>
               <div className="flex gap-5">
                 <button
                   type="submit"
-                  className="btn btn-primary w-32 rounded-md"
+                  className="btn btn-primary flex-grow rounded-md"
                 >
                   Sign up
                 </button>
                 <Link
-                  className="btn btn-outline w-32 rounded-md"
+                  className="btn btn-outline flex-grow rounded-md"
                   to="/auth/signin"
                 >
                   Sign in
@@ -77,6 +119,17 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      {/* field validation error messages only to show */}
+      {errors.email && (
+        <div className="errorSection">
+          {<p role="alert">{errors.email?.message}</p>}
+        </div>
+      )}
+      {errors.password && (
+        <div className="errorSection">
+          {<p role="alert">{errors.password?.message}</p>}
+        </div>
+      )}
     </div>
   );
 };

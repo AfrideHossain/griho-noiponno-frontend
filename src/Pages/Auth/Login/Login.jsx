@@ -1,6 +1,36 @@
 import { Link } from "react-router-dom";
+
+// importing react hook form
+import { useForm } from "react-hook-form";
+// import yup resolver
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import "../auth.css";
+import ValidationSchema from "../validator/YupUniversalValidator";
+import useContextHook from "../../../hooks/useContextHook";
+
 const Login = () => {
+  // initializing react hook form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(ValidationSchema) });
+
+  // destructuring essential functions from usecontexthook
+  const { signInWithEmailAndPass } = useContextHook();
+
+  // submit handler function
+  const submitHandler = (credentials) => {
+    const { email, password } = credentials;
+    signInWithEmailAndPass(email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="relative h-screen overflow-hidden">
       <img
@@ -32,25 +62,33 @@ const Login = () => {
               <h2 className="text-3xl md:text-4xl font-medium">Hello, </h2>
               <h1 className="text-5xl md:text-6xl font-extrabold">Welcome!</h1>
             </div>
-            <form className="form w-full space-y-3">
-              <div className="input-section">
-                <input type="text" placeholder="Username (E.g: johndoe)" />
-              </div>
+            <form
+              className="form w-full space-y-3"
+              onSubmit={handleSubmit(submitHandler)}
+            >
               <div className="input-section">
                 <input
                   type="email"
                   placeholder="email (E.g: johndoe@email.com)"
+                  {...register("email")}
+                />
+              </div>
+              <div className="input-section">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  {...register("password")}
                 />
               </div>
               <div className="flex gap-5">
                 <button
                   type="submit"
-                  className="btn btn-primary w-32 rounded-md"
+                  className="btn btn-primary flex-grow rounded-md"
                 >
                   Sign in
                 </button>
                 <Link
-                  className="btn btn-outline w-32 rounded-md"
+                  className="btn btn-outline flex-grow rounded-md"
                   to="/auth/signup"
                 >
                   Sign up
@@ -76,6 +114,17 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {/* field validation error messages only to show */}
+      {errors.email && (
+        <div className="errorSection">
+          {<p role="alert">{errors.email?.message}</p>}
+        </div>
+      )}
+      {errors.password && (
+        <div className="errorSection">
+          {<p role="alert">{errors.password?.message}</p>}
+        </div>
+      )}
     </div>
   );
 };
