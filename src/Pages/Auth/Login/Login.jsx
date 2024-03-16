@@ -18,12 +18,23 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(ValidationSchema) });
 
   // destructuring essential functions from usecontexthook
-  const { signInWithEmailAndPass } = useContextHook();
+  const { signInWithEmailAndPass, signInWithGoogle } = useContextHook();
 
   // submit handler function
   const submitHandler = (credentials) => {
     const { email, password } = credentials;
     signInWithEmailAndPass(email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // social login section
+  const googleLogin = () => {
+    signInWithGoogle()
       .then((result) => {
         console.log(result);
       })
@@ -103,7 +114,10 @@ const Login = () => {
             </div>
             {/* social login  */}
             <div className="mt-5">
-              <button className="w-full btn bg-white hover:bg-gray-300 text-gray-800">
+              <button
+                className="w-full btn bg-white hover:bg-gray-300 text-gray-800"
+                onClick={() => googleLogin()}
+              >
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
                   alt="google icon"
