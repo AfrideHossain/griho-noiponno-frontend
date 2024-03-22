@@ -8,6 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "../auth.css";
 import ValidationSchema from "../validator/YupUniversalValidator";
 import useContextHook from "../../../hooks/useContextHook";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { sendEmailVerification } from "firebase/auth";
 
 const SignUp = () => {
   const {
@@ -16,14 +18,26 @@ const SignUp = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(ValidationSchema) });
 
+  // use axiosSecure
+  const axiosSecure = useAxiosSecure();
+
   // destructure sign up functions  from usecontexthook
   const { signUpWithEmailAndPass, signInWithGoogle } = useContextHook();
   //  submit handler to send data to the server
   const submitHandler = (credentials) => {
-    const { email, password } = credentials;
+    const { username, email, password } = credentials;
     signUpWithEmailAndPass(email, password)
       .then((result) => {
-        console.log(result);
+        sendEmailVerification(result.user).then(() => {
+          axiosSecure
+            .post("/createuser", { username, email, role: "user", cart: [] })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        });
       })
       .catch((err) => {
         console.log(err);

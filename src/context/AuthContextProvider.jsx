@@ -9,6 +9,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 export const AuthContext = createContext();
 
@@ -21,6 +22,9 @@ const AuthContextProvider = ({ children }) => {
   // Context states
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+
+  // use axisSecure
+  const axiosSecure = useAxiosSecure();
 
   /****************************
    ** Auth related functions **
@@ -50,33 +54,36 @@ const AuthContextProvider = ({ children }) => {
   /****************************************/
 
   // Auth state change observer
-  /* useEffect(() => {
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUserData) => {
       setUser(currentUserData);
       if (currentUserData && currentUserData.email) {
-        fetch(`${import.meta.env.VITE_BACKEND}/jwtSign`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            username: currentUserData.displayName,
-            email: currentUserData.email,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            localStorage.setItem("aperture-token", data.token);
+        axiosSecure
+          .post(
+            "/jwtSign",
+            {
+              username: currentUserData.displayName,
+              email: currentUserData.email,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((res) => {
+            localStorage.setItem("auth-token", res.data.token);
           });
       } else {
-        localStorage.removeItem("aperture-token");
+        localStorage.removeItem("auth-token");
       }
+
       setLoading(false);
     });
     return () => {
       unsubscribe();
     };
-  }, [auth]); */
+  }, [auth, axiosSecure]);
 
   //auth context values
   const authContextValues = {
