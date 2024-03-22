@@ -1,6 +1,8 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingCart, HiOutlineUserCircle } from "react-icons/hi";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 const Navitems = (
   <>
@@ -22,6 +24,8 @@ const Navitems = (
 );
 
 const Navbar = () => {
+  // destructure user from context
+  const { user } = useContext(AuthContext);
   return (
     <>
       <div className="drawer">
@@ -61,6 +65,7 @@ const Navbar = () => {
               <ul className="menu menu-horizontal">
                 {/* Navbar menu content here */}
                 {Navitems}
+                {user && <li>{user.email}</li>}
               </ul>
             </div>
             <div className="navbar-end w-auto md:w-1/2">
