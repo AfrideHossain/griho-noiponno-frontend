@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // import react hook form
 import { useForm } from "react-hook-form";
@@ -9,7 +9,7 @@ import "../auth.css";
 import ValidationSchema from "../validator/YupUniversalValidator";
 import useContextHook from "../../../hooks/useContextHook";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { sendEmailVerification } from "firebase/auth";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   const {
@@ -18,6 +18,11 @@ const SignUp = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(ValidationSchema) });
 
+  // use navigation and location hooks
+  const location = useLocation();
+  const navigate = useNavigate();
+  // set previous location or home as default
+  const from = location?.state?.from?.pathname || "/";
   // use axiosSecure
   const axiosSecure = useAxiosSecure();
 
@@ -28,11 +33,23 @@ const SignUp = () => {
     const { username, email, password } = credentials;
     signUpWithEmailAndPass(email, password)
       .then((result) => {
-        sendEmailVerification(result.user).then(() => {
+        // send verification email
+        sendEmailVerification(result.user)
+          .then(() => {})
+          .catch((err) => {
+            console.error(err.message);
+          });
+        // upadate display name new user's information to database
+        updateProfile(result.user, { displayName: username }).then(() => {
           axiosSecure
-            .post("/createuser", { username, email, role: "user", cart: [] })
-            .then((res) => {
-              console.log(res);
+            .post("/createuser", {
+              username,
+              email,
+              role: "user",
+              cart: [],
+            })
+            .then(() => {
+              navigate(from, { replace: true });
             })
             .catch((err) => {
               console.error(err);
@@ -48,7 +65,27 @@ const SignUp = () => {
   const googleLogin = () => {
     signInWithGoogle()
       .then((result) => {
-        console.log(result);
+        const userDetails = result.user;
+        // send verification email
+        sendEmailVerification(result.user)
+          .then(() => {})
+          .catch((err) => {
+            console.error(err.message);
+          });
+        // add new user's information to database
+        axiosSecure
+          .post("/createuser", {
+            username: userDetails.displayName,
+            email: userDetails.email,
+            role: "user",
+            cart: [],
+          })
+          .then(() => {
+            navigate(from, { replace: true });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       })
       .catch((err) => {
         console.error(err);
@@ -77,9 +114,11 @@ const SignUp = () => {
           <div className="p-5 md:p-10 w-full md:w-auto h-full bg-gray-800 backdrop-blur-2xl ms-auto rounded-r-xl">
             {/* texts section */}
             <div className="w-full">
-              <h3 className="text-xl md:text-2xl font-bold mb-20">
-                Griho Noiponno
-              </h3>
+              <Link to="/">
+                <h3 className="text-xl md:text-2xl font-bold mb-20">
+                  Griho Noiponno
+                </h3>
+              </Link>
             </div>
             <div className="w-full mb-5">
               <h2 className="text-3xl md:text-4xl font-medium">Join us </h2>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // importing react hook form
 import { useForm } from "react-hook-form";
@@ -17,6 +17,12 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(ValidationSchema) });
 
+  // use navigation and location hooks
+  const location = useLocation();
+  const navigate = useNavigate();
+  // set previous location or home as default
+  const from = location?.state?.from?.pathname || "/";
+
   // destructuring essential functions from usecontexthook
   const { signInWithEmailAndPass, signInWithGoogle } = useContextHook();
 
@@ -25,7 +31,7 @@ const Login = () => {
     const { email, password } = credentials;
     signInWithEmailAndPass(email, password)
       .then((result) => {
-        console.log(result);
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +42,8 @@ const Login = () => {
   const googleLogin = () => {
     signInWithGoogle()
       .then((result) => {
-        console.log(result);
+        // console.log(result);
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -65,9 +72,11 @@ const Login = () => {
           <div className="p-5 md:p-10 w-full md:w-auto h-full bg-gray-800 backdrop-blur-2xl ms-auto rounded-r-xl">
             {/* texts section */}
             <div className="w-full">
-              <h3 className="text-xl md:text-2xl font-bold mb-20">
-                Griho Noiponno
-              </h3>
+              <Link to="/">
+                <h3 className="text-xl md:text-2xl font-bold mb-20">
+                  Griho Noiponno
+                </h3>
+              </Link>
             </div>
             <div className="w-full mb-5">
               <h2 className="text-3xl md:text-4xl font-medium">Hello, </h2>
