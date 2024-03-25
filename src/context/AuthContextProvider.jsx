@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import {
   getAuth,
@@ -10,6 +11,7 @@ import {
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+// import useAxiosNoAuth from "../hooks/useAxiosNoAuth";
 
 export const AuthContext = createContext();
 
@@ -21,10 +23,14 @@ const AuthContextProvider = ({ children }) => {
 
   // Context states
   const [user, setUser] = useState();
+  // set role state
+  const [userRole, setUserRole] = useState("");
   const [loading, setLoading] = useState(true);
 
   // use axisSecure
   const axiosSecure = useAxiosSecure();
+  // use axiosNoAuth
+  // const axiosNoAuth = useAxiosNoAuth
 
   /****************************
    ** Auth related functions **
@@ -57,6 +63,12 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUserData) => {
       setUser(currentUserData);
+      axiosSecure
+        .get(`/user/role/${currentUserData?.email}`)
+        .then((res) => {
+          setUserRole(res.data.role);
+        })
+        .catch((err) => console.log(err.message));
       if (currentUserData && currentUserData.email) {
         axiosSecure
           .post(
@@ -75,6 +87,7 @@ const AuthContextProvider = ({ children }) => {
             localStorage.setItem("auth-token", res.data.token);
           });
       } else {
+        setUserRole("");
         localStorage.removeItem("auth-token");
       }
 
@@ -88,6 +101,7 @@ const AuthContextProvider = ({ children }) => {
   //auth context values
   const authContextValues = {
     user,
+    userRole,
     loading,
     signUpWithEmailAndPass,
     signInWithEmailAndPass,

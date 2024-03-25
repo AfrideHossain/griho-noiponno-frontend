@@ -13,6 +13,7 @@ import User from "../Pages/User/User";
 import Admin from "../Pages/Admin/Admin";
 import AddProduct from "../Pages/Admin/AddProduct/AddProduct";
 import Cart from "../Pages/User/Cart/Cart";
+import SecureAdminRoute from "../secureRoutes/SecureAdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -87,7 +88,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Admin />,
+        element: (
+          <SecureAdminRoute>
+            <Admin />
+          </SecureAdminRoute>
+        ),
       },
       {
         path: "addproduct",

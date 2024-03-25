@@ -1,5 +1,5 @@
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingCart, HiOutlineUserCircle } from "react-icons/hi";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContextProvider";
@@ -25,7 +25,13 @@ const Navitems = (
 
 const Navbar = () => {
   // destructure user from context
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user, userRole, logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleSignout = () => {
+    logOutUser().then(() => {
+      navigate("/auth/signin");
+    });
+  };
 
   return (
     <>
@@ -129,11 +135,20 @@ const Navbar = () => {
                             Profile
                           </Link>
                         </li>
+                        {userRole === "admin" && (
+                          <li className="py-1">
+                            <Link to={"/admin"} className="justify-between">
+                              Dashboard
+                            </Link>
+                          </li>
+                        )}
                         {/* <li>
                   <a>Settings</a>
                 </li> */}
                         <li className="py-1">
-                          <button onClick={() => logOutUser()}>Logout</button>
+                          <button onClick={() => handleSignout()}>
+                            Logout
+                          </button>
                         </li>
                       </ul>
                     </div>
