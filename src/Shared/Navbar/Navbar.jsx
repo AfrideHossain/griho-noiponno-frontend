@@ -22,6 +22,13 @@ const Navitems = (
     </li>
   </>
 );
+const AdminRoutes = (
+  <>
+    <li>
+      <Link to="/admin/addproduct">Add product</Link>
+    </li>
+  </>
+);
 
 const Navbar = () => {
   // destructure user from context
@@ -72,6 +79,7 @@ const Navbar = () => {
               <ul className="menu menu-horizontal">
                 {/* Navbar menu content here */}
                 {Navitems}
+                {userRole === "admin" && AdminRoutes}
               </ul>
             </div>
             <div className="navbar-end w-auto md:w-1/2">

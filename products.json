@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "category": "seating",
+    "name": "Classic Wooden Chair",
+    "description": "A sturdy wooden chair with a timeless design.",
+    "stock": 150,
+    "imageUrl": "images/classic-wooden-chair.jpg",
+    "price": 49.99
+  },
+  {
+    "id": 2,
+    "category": "tables",
+    "name": "Modern Metal Table",
+    "description": "A sleek black metal table perfect for contemporary spaces.",
+    "stock": 75,
+    "imageUrl": "images/modern-metal-table.jpg",
+    "price": 109.99
+  },
+  {
+    "id": 3,
+    "category": "sofas",
+    "name": "Luxury Leather Sofa",
+    "description": "A comfortable grey leather sofa that adds elegance to any room.",
+    "stock": 30,
+    "imageUrl": "images/luxury-leather-sofa.jpg",
+    "price": 499.99
+  },
+  {
+    "id": 4,
+    "category": "beds",
+    "name": "Dreamy White Bed",
+    "description": "A cozy bed with a white wooden frame for a peaceful sleep.",
+    "stock": 40,
+    "imageUrl": "images/dreamy-white-bed.jpg",
+    "price": 299.99
+  },
+  {
+    "id": 5,
+    "category": "desks",
+    "name": "Clear Glass Desk",
+    "description": "A transparent glass desk that gives an illusion of more space.",
+    "stock": 55,
+    "imageUrl": "images/clear-glass-desk.jpg",
+    "price": 199.99
+  },
+  {
+    "id": 6,
+    "category": "storage",
+    "name": "Oak Wood Shelf",
+    "description": "A sturdy oak wood shelf to keep your books and decor organized.",
+    "stock": 120,
+    "imageUrl": "images/oak-wood-shelf.jpg",
+    "price": 89.99
+  },
+  {
+    "id": 7,
+    "category": "storage",
+    "name": "Grey Metal Cabinet",
+    "description": "A durable metal cabinet for secure storage needs.",
+    "stock": 60,
+    "imageUrl": "images/grey-metal-cabinet.jpg",
+    "price": 259.99
+  },
+  {
+    "id": 8,
+    "category": "bedroom",
+    "name": "Cherry Wood Dresser",
+    "description": "A classic dresser with a rich cherry wood finish.",
+    "stock": 45,
+    "imageUrl": "images/cherry-wood-dresser.jpg",
+    "price": 179.99
+  },
+  {
+    "id": 9,
+    "category": "bedroom",
+    "name": "Sleek Black Nightstand",
+    "description": "A modern nightstand in black for a touch of sophistication.",
+    "stock": 80,
+    "imageUrl": "images/sleek-black-nightstand.jpg",
+    "price": 59.99
+  },
+  {
+    "id": 10,
+    "category": "storage",
+    "name": "Classic Brown Bookcase",
+    "description": "A spacious brown bookcase for your extensive book collection.",
+    "stock": 100,
+    "imageUrl": "images/classic-brown-bookcase.jpg",
+    "price": 149.99
+  }
+]

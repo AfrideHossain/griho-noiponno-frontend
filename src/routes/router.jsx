@@ -96,7 +96,11 @@ const router = createBrowserRouter([
       },
       {
         path: "addproduct",
-        element: <AddProduct />,
+        element: (
+          <SecureAdminRoute>
+            <AddProduct />
+          </SecureAdminRoute>
+        ),
       },
     ],
   },

@@ -1,34 +1,28 @@
-import { useState } from "react";
+// import useForm from react hook form
+import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+const AddProduct = () => {
+  // destructure essentials from useFork
+  const {
+    register,
+    handleSubmit,
+    // eslint-disable-next-line no-unused-vars
+    formState: { errors },
+  } = useForm();
 
-const AddProduct = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    price: 0,
-    description: "",
-    image: "",
-  });
-
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(formData); // Pass form data to parent component
-    setFormData({
-      name: "",
-      price: 0,
-      category: "",
-      stock: 0,
-      description: "",
-      image: "",
-    }); // Reset form after submission
+  // destructure axiosSecure
+  const axiosSecure = useAxiosSecure();
+  const submitHandler = (data) => {
+    console.log(data);
+    axiosSecure.post("/products/addproduct", data).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
     <div className="min-h-screen flex justify-center items-center">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(submitHandler)}
         className={`w-full md:w-[768px] rounded-lg shadow-md px-6 py-8 flex flex-col gap-4 bg-white bg-opacity-10 border border-gray-600`}
       >
         <h2 className="text-2xl text-white font-bold">Add New Product</h2>
@@ -38,12 +32,8 @@ const AddProduct = ({ onSubmit }) => {
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
             className="w-full px-3 py-2 rounded-md bg-gray-600 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-            value={formData.name}
-            onChange={handleChange}
-            required
+            {...register("productName", { required: true })}
           />
         </div>
         <div className="flex flex-col space-y-2">
@@ -51,12 +41,8 @@ const AddProduct = ({ onSubmit }) => {
             Description
           </label>
           <textarea
-            id="description"
-            name="description"
             className="w-full px-3 py-2 rounded-md bg-gray-600 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-            value={formData.name}
-            onChange={handleChange}
-            required
+            {...register("productDescription", { required: true })}
           ></textarea>
         </div>
         <div className="flex gap-4 justify-between">
@@ -66,12 +52,8 @@ const AddProduct = ({ onSubmit }) => {
             </label>
             <input
               type="text"
-              id="category"
-              name="category"
               className="w-full px-3 py-2 rounded-md bg-gray-600 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-              value={formData.category}
-              onChange={handleChange}
-              required
+              {...register("productCategory", { required: true })}
             />
           </div>
           <div className="flex flex-col space-y-2">
@@ -79,13 +61,11 @@ const AddProduct = ({ onSubmit }) => {
               Stock
             </label>
             <input
-              type="number"
-              id="stock"
-              name="stock"
               className="w-full px-3 py-2 rounded-md bg-gray-600 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-              value={formData.stock}
-              onChange={handleChange}
-              required
+              {...register("productStock", {
+                required: true,
+                valueAsNumber: true,
+              })}
             />
           </div>
         </div>
@@ -94,13 +74,12 @@ const AddProduct = ({ onSubmit }) => {
             Price
           </label>
           <input
-            type="number"
-            id="price"
-            name="price"
+            type="text"
             className="w-full px-3 py-2 rounded-md bg-gray-600 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-            value={formData.price}
-            onChange={handleChange}
-            required
+            {...register("productPrice", {
+              required: true,
+              valueAsNumber: true,
+            })}
           />
         </div>
 
@@ -110,12 +89,8 @@ const AddProduct = ({ onSubmit }) => {
           </label>
           <input
             type="text"
-            id="image"
-            name="image"
             className="w-full px-3 py-2 rounded-md bg-gray-600 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-            value={formData.name}
-            onChange={handleChange}
-            required
+            {...register("productImage", { required: true })}
           />
         </div>
         <div className="flex justify-end">
