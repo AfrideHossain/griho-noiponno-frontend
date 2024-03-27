@@ -4,10 +4,10 @@
 .input-section {
   @apply w-full h-16 bg-slate-300 rounded-sm;
 }
-input {
+.input-section input {
   @apply bg-transparent outline-none md:w-96 w-full h-full text-black font-medium px-3 border-l-4 border-purple-600;
 }
-input::placeholder {
+.input-section input::placeholder {
   @apply text-gray-500 font-medium;
 }
 

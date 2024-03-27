@@ -14,6 +14,7 @@ import Admin from "../Pages/Admin/Admin";
 import AddProduct from "../Pages/Admin/AddProduct/AddProduct";
 import Cart from "../Pages/User/Cart/Cart";
 import SecureAdminRoute from "../secureRoutes/SecureAdminRoute";
+import EditUser from "../Pages/User/EditUser/EditUser";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "editprofile",
+        element: <EditUser />,
       },
     ],
   },

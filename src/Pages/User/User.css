@@ -25,7 +25,7 @@
   @apply py-0 pt-4;
 }
 .infoTable td {
-  @apply px-0 py-4;
+  @apply px-0 py-4 my-2;
 }
 .infoTable tr td:nth-child(1) {
   @apply font-semibold text-gray-300;
@@ -35,7 +35,7 @@
   @apply w-full mt-5 md:mt-10 px-0;
 }
 .socialLinks tr {
-  @apply border-0 border-gray-400;
+  @apply border-0 border-gray-400 grid grid-cols-2 my-2;
 }
 .socialLinks tr td:nth-child(1) {
   @apply font-semibold text-gray-300;
@@ -45,4 +45,17 @@
 }
 .socialLinks td p {
   @apply flex items-center gap-3;
+}
+
+/* input related style rules */
+.socialLinks .input-td {
+  @apply bg-white bg-opacity-15 border border-gray-400 rounded-md w-full flex items-center justify-center gap-1;
+}
+.input-field {
+  /* remove the default form field styling from browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  @apply bg-transparent w-full min-h-full border-none outline-none placeholder-gray-600 text-gray-200 text-base font-normal;
 }

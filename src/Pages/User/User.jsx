@@ -26,11 +26,11 @@ const User = () => {
       {/* user profile */}
       <div className="">
         {/* top bar */}
-        <div className="topbar">
+        {/* <div className="topbar">
           <ul className="list-none flex items-center gap-3 menu menu-horizontal">
             {topBarItems}
           </ul>
-        </div>
+        </div> */}
         {/* profile information */}
         <div className="w-full grid md:grid-cols-3 gap-3">
           {/* profile picture and social media section */}
@@ -50,9 +50,12 @@ const User = () => {
                 <address>6610 N Lovington Hwy, Hobbs, New York, 88242</address>
                 {/* cta buttons */}
                 <div className="w-full flex justify-center items-center gap-2 mt-3">
-                  <button className="flex-grow btn btn-primary">
+                  <Link
+                    to={"/dashboard/editprofile"}
+                    className="flex-grow btn btn-primary"
+                  >
                     Edit Profile
-                  </button>
+                  </Link>
                   <button className="flex-grow btn btn-outline border-blue-500 text-blue-500 hover:btn-primary">
                     Change Picture
                   </button>
@@ -119,7 +122,7 @@ const User = () => {
                   </tr>
                   {/* Alt phone */}
                   <tr>
-                    <td>District</td>
+                    <td>Alt Phone</td>
                     <td>+880 1XXXX XXXXX</td>
                   </tr>
                   {/* Date of birth */}
