@@ -15,6 +15,9 @@ import AddProduct from "../Pages/Admin/AddProduct/AddProduct";
 import Cart from "../Pages/User/Cart/Cart";
 import SecureAdminRoute from "../secureRoutes/SecureAdminRoute";
 import EditUser from "../Pages/User/EditUser/EditUser";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+
+const axiosSecure = useAxiosSecure();
 
 const router = createBrowserRouter([
   {
@@ -75,6 +78,11 @@ const router = createBrowserRouter([
       {
         path: "user",
         element: <User />,
+        loader: async () => {
+          let getUserData = await axiosSecure.get("users/profile");
+          let userData = getUserData.data;
+          return userData;
+        },
       },
       {
         path: "cart",
@@ -83,6 +91,11 @@ const router = createBrowserRouter([
       {
         path: "editprofile",
         element: <EditUser />,
+        loader: async () => {
+          let getUserData = await axiosSecure.get("users/profile");
+          let userData = getUserData.data;
+          return userData;
+        },
       },
     ],
   },

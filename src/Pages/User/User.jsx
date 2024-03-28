@@ -2,7 +2,7 @@
 // importing user css
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "./User.css";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 // importing essential icons
 import { BsFacebook } from "react-icons/bs";
@@ -21,6 +21,7 @@ const topBarItems = (
 );
 
 const User = () => {
+  const userProfile = useLoaderData();
   return (
     <div className="min-h-screen p-4">
       {/* user profile */}
@@ -45,10 +46,17 @@ const User = () => {
                 alt="Display picture"
               />
               <div className="mt-5 flex flex-col items-center gap-2 max-h-48 text-center">
-                <h1>EmmaStone</h1>
-                <p>emmastone@gmail.com</p>
-                <address>6610 N Lovington Hwy, Hobbs, New York, 88242</address>
-                {/* cta buttons */}
+                <h1>{userProfile?.username || "--"}</h1>
+                <p>{userProfile?.email || "--"}</p>
+                <address>
+                  {`${userProfile?.street || "--"}, ${
+                    userProfile?.postOffice || "--"
+                  }, ${userProfile?.district || "--"}, ${
+                    userProfile?.division || "--"
+                  }, ${userProfile?.country || "--"}, ${
+                    userProfile?.zip || "--"
+                  }`}
+                </address>
                 <div className="w-full flex justify-center items-center gap-2 mt-3">
                   <Link
                     to={"/dashboard/editprofile"}
@@ -75,7 +83,7 @@ const User = () => {
                           <BsFacebook className="w-5 h-5" /> Facebook
                         </p>
                       </td>
-                      <td>@{"emmastone"}</td>
+                      <td>@{userProfile?.facebookID || "--"}</td>
                     </tr>
                     {/* Instagram*/}
                     <tr>
@@ -84,7 +92,7 @@ const User = () => {
                           <FaInstagram className="w-5 h-5" /> Instagram
                         </p>
                       </td>
-                      <td>@{"emmastone"}</td>
+                      <td>@{userProfile?.instagramID || "--"}</td>
                     </tr>
                     {/* Twitter */}
                     <tr>
@@ -93,7 +101,7 @@ const User = () => {
                           <FaTwitter className="w-5 h-5" /> Twitter
                         </p>
                       </td>
-                      <td>@{"emmastone"}</td>
+                      <td>@{userProfile?.twitterID || "--"}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -108,32 +116,32 @@ const User = () => {
                   {/* Full Name */}
                   <tr>
                     <td>Full Name</td>
-                    <td>Emma Stone</td>
+                    <td>{userProfile?.fullName || "--"}</td>
                   </tr>
                   {/* Email*/}
                   <tr>
                     <td>Email</td>
-                    <td>emmastone@gmail.com</td>
+                    <td>{userProfile?.email || "--"}</td>
                   </tr>
                   {/* Phone */}
                   <tr>
                     <td>Phone</td>
-                    <td>+880 1XXXX XXXXX</td>
+                    <td>{userProfile?.phone || "--"}</td>
                   </tr>
                   {/* Alt phone */}
                   <tr>
                     <td>Alt Phone</td>
-                    <td>+880 1XXXX XXXXX</td>
+                    <td>{userProfile?.altPhone || "--"}</td>
                   </tr>
                   {/* Date of birth */}
                   <tr>
                     <td>Date Of Birth</td>
-                    <td>dd/mm/yyyy</td>
+                    <td>{userProfile?.dob || "--"}</td>
                   </tr>
                   {/* NID */}
                   <tr>
                     <td>National ID</td>
-                    <td>XXX XXX XXXX</td>
+                    <td>{userProfile?.nid || "--"}</td>
                   </tr>
                   {/* Payment method */}
                   <tr>
@@ -151,32 +159,32 @@ const User = () => {
                     {/* Full Name */}
                     <tr>
                       <td>Street</td>
-                      <td> 77 Satmasjid Rd</td>
+                      <td>{userProfile?.street || "--"}</td>
                     </tr>
                     {/* Email*/}
                     <tr>
                       <td>Post office</td>
-                      <td>Savar</td>
+                      <td>{userProfile?.postOffice || "--"}</td>
                     </tr>
                     {/* Alt phone */}
                     <tr>
                       <td>District</td>
-                      <td>Dhaka</td>
+                      <td>{userProfile?.district || "--"}</td>
                     </tr>
                     {/* Date of birth */}
                     <tr>
                       <td>Division</td>
-                      <td>Dhaka</td>
+                      <td>{userProfile?.division || "--"}</td>
                     </tr>
                     {/* NID */}
                     <tr>
                       <td>Country</td>
-                      <td>Bangladesh</td>
+                      <td>{userProfile?.country || "--"}</td>
                     </tr>
                     {/* Payment method */}
                     <tr>
                       <td>Zip Code</td>
-                      <td>1230</td>
+                      <td>{userProfile?.zip || "--"}</td>
                     </tr>
                   </tbody>
                 </table>

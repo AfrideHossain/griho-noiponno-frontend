@@ -2,7 +2,7 @@
 // importing user css
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "../User.css";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 // importing essential icons
 import { BsFacebook } from "react-icons/bs";
@@ -11,6 +11,7 @@ import { TbMoodSadSquint } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const EditUser = () => {
+  const userProfile = useLoaderData();
   // destructure essentials from useForm
   const {
     register,
@@ -50,9 +51,17 @@ const EditUser = () => {
                 alt="Display picture"
               />
               <div className="mt-5 flex flex-col items-center gap-2 max-h-48 text-center">
-                <h1>EmmaStone</h1>
-                <p>emmastone@gmail.com</p>
-                <address>6610 N Lovington Hwy, Hobbs, New York, 88242</address>
+                <h1>{userProfile?.username || "--"}</h1>
+                <p>{userProfile?.email || "--"}</p>
+                <address>
+                  {`${userProfile?.street || "--"}, ${
+                    userProfile?.postOffice || "--"
+                  }, ${userProfile?.district || "--"}, ${
+                    userProfile?.division || "--"
+                  }, ${userProfile?.country || "--"}, ${
+                    userProfile?.zip || "--"
+                  }`}
+                </address>
                 {/* cta buttons */}
                 <div className="w-full flex justify-center items-center gap-2 mt-3">
                   <button type="submit" className="flex-grow btn btn-primary">
@@ -82,6 +91,7 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
+                          placeholder={`${userProfile?.facebookID || "--"}`}
                           {...register("facebookID")}
                         />
                       </td>
@@ -98,6 +108,7 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
+                          placeholder={`${userProfile?.instagramID || "--"}`}
                           {...register("instagramID")}
                         />
                       </td>
@@ -114,6 +125,7 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
+                          placeholder={`${userProfile?.twitterID || "--"}`}
                           {...register("twitterID")}
                         />
                       </td>
@@ -135,7 +147,9 @@ const EditUser = () => {
                       <input
                         type="text"
                         className="input-field"
-                        placeholder="e.g: Emma Stone"
+                        placeholder={`${
+                          userProfile?.fullName || "Enter your full name"
+                        }`}
                         {...register("fullName")}
                       />
                     </td>
@@ -147,8 +161,8 @@ const EditUser = () => {
                       <input
                         type="text"
                         className="input-field"
-                        placeholder="e.g: emmastone@gmail.com"
-                        {...register("email")}
+                        placeholder={`${userProfile?.email}`}
+                        // {...register("email")}
                       />
                     </td>
                   </tr>
@@ -159,7 +173,10 @@ const EditUser = () => {
                       <input
                         type="text"
                         className="input-field"
-                        placeholder="e.g: +8801XXXXXXXXX"
+                        placeholder={`${
+                          userProfile?.phone ||
+                          "Your phone Number (e.g: +8801XXXXXXXXX )"
+                        }`}
                         {...register("phone")}
                       />
                     </td>
@@ -171,7 +188,10 @@ const EditUser = () => {
                       <input
                         type="text"
                         className="input-field"
-                        placeholder="e.g: +8801XXXXXXXXX"
+                        placeholder={`${
+                          userProfile?.altPhone ||
+                          "Your alternative phone Number (e.g: +8801XXXXXXXXX )"
+                        }`}
                         {...register("altPhone")}
                       />
                     </td>
@@ -183,7 +203,7 @@ const EditUser = () => {
                       <input
                         type="date"
                         className="input-field"
-                        placeholder="e.g: dd/mm/yyyy"
+                        value={userProfile?.dob}
                         {...register("dob")}
                       />
                     </td>
@@ -195,7 +215,9 @@ const EditUser = () => {
                       <input
                         type="text"
                         className="input-field"
-                        placeholder="e.g: XXXXXXXXXX"
+                        placeholder={`${
+                          userProfile?.nid || "Your NID number(e.g: XXXXXXXXXX)"
+                        }`}
                         {...register("nid")}
                       />
                     </td>
@@ -220,7 +242,9 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
-                          placeholder="77 Satmasjid Rd"
+                          placeholder={`${
+                            userProfile?.street || "77 Satmasjid Rd"
+                          }`}
                           {...register("street")}
                         />
                       </td>
@@ -232,7 +256,7 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
-                          placeholder="Savar"
+                          placeholder={`${userProfile?.postOffice || "Savar"}`}
                           {...register("postOffice")}
                         />
                       </td>
@@ -244,7 +268,7 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
-                          placeholder="Dhaka"
+                          placeholder={`${userProfile?.district || "Dhaka"}`}
                           {...register("district")}
                         />
                       </td>
@@ -256,7 +280,7 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
-                          placeholder="Dhaka"
+                          placeholder={`${userProfile?.division || "Dhaka"}`}
                           {...register("division")}
                         />
                       </td>
@@ -268,7 +292,9 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
-                          placeholder="Bangladesh"
+                          placeholder={`${
+                            userProfile?.country || "Bangladesh"
+                          }`}
                           {...register("country")}
                         />
                       </td>
@@ -280,7 +306,7 @@ const EditUser = () => {
                         <input
                           type="text"
                           className="input-field"
-                          placeholder="1230"
+                          placeholder={`${userProfile?.zip || "1230"}`}
                           {...register("zip")}
                         />
                       </td>
