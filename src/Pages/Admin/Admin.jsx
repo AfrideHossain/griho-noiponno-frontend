@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import OrderList from "./OrderList/OrderList";
 import ProductTable from "./ProductTable/ProductTable";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Admin = () => {
   // prodcts list
-  const products = [
+  /* const products = [
     {
       id: 1,
       name: "T-Shirt",
@@ -28,7 +30,22 @@ const Admin = () => {
       image: "https://via.placeholder.com/150",
       description: "Noise-canceling headphones for immersive listening.",
     },
-  ];
+  ]; */
+
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  // get axiosSecure to send request to api
+  const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    setLoading(true);
+    axiosSecure.get("/products/allproducts").then((res) => {
+      console.log("data fetched => ", res.data);
+      setProducts(res.data);
+      setLoading(false);
+    });
+  }, [axiosSecure]);
 
   return (
     <div className="w-full min-h-screen">

@@ -1,27 +1,8 @@
-import { useState } from "react";
-
 /* eslint-disable react/prop-types */
 
 // essential icons
 import { HiX } from "react-icons/hi";
-const ProductTable = ({ products, onDelete, onEdit, loading }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category: "",
-    stock: "",
-    image: "",
-  });
-
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(formData); // Pass form data to parent component for submission
-  };
+const ProductTable = ({ products, loading }) => {
   return (
     <>
       <div className="flex flex-col shadow-md rounded-lg overflow-x-auto">
@@ -32,9 +13,10 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
               <tr>
                 <th>Image</th>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Price</th>
                 <th>Stock</th>
-                <th className="text-center">Actions</th>
+                <th className="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -45,16 +27,17 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src={product.image}
+                            src={product.productImage}
                             alt="Product image avatar"
                             className="w-full h-full object-cover"
                           />
                         </div>
                       </div>
                     </td>
-                    <td>{product.name}</td>
-                    <td>${product.price}</td>
-                    <td>{product.stock}</td>
+                    <td>{product.productName}</td>
+                    <td>{product.productCategory}</td>
+                    <td>${product.productPrice}</td>
+                    <td>{product.productStock}</td>
 
                     <td className="flex justify-end space-x-2">
                       <button
@@ -69,7 +52,7 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                       </button>
                       <button
                         className="btn bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-700 outline-none"
-                        onClick={() => onDelete(product.id)}
+                        onClick={() => {}}
                       >
                         Delete
                       </button>
@@ -83,9 +66,10 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
               <tr>
                 <th>Image</th>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Price</th>
                 <th>Stock</th>
-                <th className="text-center">Actions</th>
+                <th className="text-right">Actions</th>
               </tr>
             </tfoot>
           </table>
@@ -96,10 +80,7 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
       <dialog id="updateProductModal" className="modal">
         <div className="modal-box relative">
           <h2 className="text-xl text-white font-bold mb-5">Edit Product</h2>
-          <form
-            onSubmit={handleSubmit}
-            className={`w-full rounded-lg flex flex-col gap-4`}
-          >
+          <form className={`w-full rounded-lg flex flex-col gap-4`}>
             <div className="flex flex-col space-y-2">
               <label htmlFor="name" className="text-sm text-gray-300">
                 Product Name
@@ -109,8 +90,6 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                 id="name"
                 name="name"
                 className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-                value={formData.name}
-                onChange={handleChange}
                 placeholder="Product Name"
                 required
               />
@@ -123,8 +102,6 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                 id="description"
                 name="description"
                 className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-                value={formData.description}
-                onChange={handleChange}
                 placeholder="Write a description for your product."
                 required
               ></textarea>
@@ -140,8 +117,6 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                   id="category"
                   name="category"
                   className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  value={formData.category}
-                  onChange={handleChange}
                   placeholder="Category"
                   required
                 />
@@ -155,8 +130,6 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                   id="stock"
                   name="stock"
                   className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  value={formData.stock}
-                  onChange={handleChange}
                   placeholder="Stock"
                   required
                 />
@@ -171,8 +144,6 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                 id="price"
                 name="price"
                 className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-                value={formData.price}
-                onChange={handleChange}
                 placeholder="Price"
                 required
               />
@@ -186,8 +157,6 @@ const ProductTable = ({ products, onDelete, onEdit, loading }) => {
                 id="image"
                 name="image"
                 className="w-full px-3 py-2 rounded-md bg-gray-700 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
-                value={formData.image}
-                onChange={handleChange}
                 placeholder="Image URL"
                 required
               />
