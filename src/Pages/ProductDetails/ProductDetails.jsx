@@ -1,8 +1,29 @@
 import { CiStar, CiHeart } from "react-icons/ci";
 import { PiPaperPlaneTiltBold } from "react-icons/pi";
 import ReviewCard from "./ReviewCard/ReviewCard";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ProductDetails = () => {
+  // get params from url
+  const params = useParams();
+
+  // declare product state
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // get axiosSecure
+  const axiosSecure = useAxiosSecure();
+
+  //  fetch data when component mounts
+  useEffect(() => {
+    axiosSecure.get(`products/product/${params.id}`).then((res) => {
+      console.log("[Products Details]: ", res.data);
+      setProduct(res.data);
+      setLoading(false);
+    });
+  }, [axiosSecure, params.id]);
   return (
     <div className="max-w-7xl mx-auto mt-20 p-4">
       <div className="grid md:grid-cols-2 gap-16">
@@ -12,7 +33,9 @@ const ProductDetails = () => {
           className="rounded-md"
         />
         <div className="space-y-5">
-          <h1 className="text-3xl font-bold text-slate-200">Product name</h1>
+          <h1 className="text-3xl font-bold text-slate-200">
+            {product?.productName}
+          </h1>
           <p className="flex gap-2 items-center">
             <CiStar className="w-6 h-6" /> 4.7
           </p>

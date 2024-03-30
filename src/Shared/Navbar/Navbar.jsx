@@ -175,6 +175,7 @@ const Navbar = () => {
           <ul className="menu p-4 w-80 min-h-full bg-base-200">
             {/* Sidebar content here */}
             {Navitems}
+            {userRole === "admin" && AdminRoutes}
           </ul>
         </div>
       </div>

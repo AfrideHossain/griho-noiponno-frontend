@@ -1,11 +1,13 @@
 // import useForm from react hook form
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 const AddProduct = () => {
   // destructure essentials from useFork
   const {
     register,
     handleSubmit,
+    reset,
     // eslint-disable-next-line no-unused-vars
     formState: { errors },
   } = useForm();
@@ -13,9 +15,18 @@ const AddProduct = () => {
   // destructure axiosSecure
   const axiosSecure = useAxiosSecure();
   const submitHandler = (data) => {
-    console.log(data);
+    // console.log(data);
     axiosSecure.post("/products/addproduct", data).then((res) => {
-      console.log(res);
+      if (res.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${data.productName} Added`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
     });
   };
 

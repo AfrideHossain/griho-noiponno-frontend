@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { CiStar } from "react-icons/ci";
 
@@ -21,12 +22,15 @@ const ProductCard = ({ product }) => {
             <CiStar className="w-5 h-5" /> 5
           </p>
         </div>
-        <p>
+        {/* <p>
           Discount: <span>20</span>
           <span>%</span>
+        </p> */}
+        <p>
+          In stock: <span>{product.productStock}</span>
         </p>
         <div className="card-actions justify-between">
-          <Link className="btn btn-outline" to={"/product"}>
+          <Link className="btn btn-outline" to={`/product/${product._id}`}>
             View Details
           </Link>
           <button className="btn btn-primary">Add To Cart</button>
