@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createBrowserRouter, useParams } from "react-router-dom";
 import HomeLayout from "../Layout/Home/HomeLayout";
 import Home from "../Pages/Home/Home";

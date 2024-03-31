@@ -28,7 +28,8 @@ const ProductDetails = () => {
     <div className="max-w-7xl mx-auto mt-20 p-4">
       <div className="grid md:grid-cols-2 gap-16">
         <img
-          src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          // src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={product?.productImage}
           alt=""
           className="rounded-md"
         />
@@ -40,13 +41,10 @@ const ProductDetails = () => {
             <CiStar className="w-6 h-6" /> 4.7
           </p>
           <p className="text-base font-medium text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet vel
-            explicabo sapiente autem vitae iste labore ullam veritatis unde
-            consectetur esse sunt aspernatur beatae nisi assumenda earum, eos
-            facere quam?
+            {product?.productDescription}
           </p>
           <p className="text-lg font-semibold">
-            Price : <span>500</span> Tk
+            Price : <span>{product?.productPrice}</span> Tk
           </p>
           <div className="flex justify-between items-center">
             <button className="flex items-center gap-2">
