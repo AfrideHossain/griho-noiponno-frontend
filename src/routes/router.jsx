@@ -17,7 +17,6 @@ import Cart from "../Pages/User/Cart/Cart";
 import SecureAdminRoute from "../secureRoutes/SecureAdminRoute";
 import EditUser from "../Pages/User/EditUser/EditUser";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-
 const axiosSecure = useAxiosSecure();
 
 const router = createBrowserRouter([

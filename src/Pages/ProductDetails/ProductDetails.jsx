@@ -24,6 +24,17 @@ const ProductDetails = () => {
       setLoading(false);
     });
   }, [axiosSecure, params.id]);
+
+  const handleAddToCart = (id) => {
+    axiosSecure
+      .patch(`/users/addtocart/${id}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   return (
     <div className="max-w-7xl mx-auto mt-20 p-4">
       <div className="grid md:grid-cols-2 gap-16">
@@ -50,7 +61,12 @@ const ProductDetails = () => {
             <button className="flex items-center gap-2">
               <CiHeart className="w-6 h-6" /> 200
             </button>
-            <button className="btn btn-primary">Add to cart</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => handleAddToCart(product._id)}
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
