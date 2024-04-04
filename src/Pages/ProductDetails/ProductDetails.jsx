@@ -4,6 +4,7 @@ import ReviewCard from "./ReviewCard/ReviewCard";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ProductDetails = () => {
   // get params from url
@@ -29,7 +30,16 @@ const ProductDetails = () => {
     axiosSecure
       .patch(`/users/addtocart/${id}`, { quantity: 1 })
       .then((res) => {
-        console.log(res.data);
+        const data = res.data;
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${product.productName} is added to your cart`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       })
       .catch((err) => {
         console.error(err);

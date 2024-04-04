@@ -87,6 +87,11 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+        loader: async () => {
+          let getUserCart = await axiosSecure.get("users/cart");
+          let cartData = getUserCart.data;
+          return cartData;
+        },
       },
       {
         path: "editprofile",
