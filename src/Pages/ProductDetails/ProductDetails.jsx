@@ -27,7 +27,7 @@ const ProductDetails = () => {
 
   const handleAddToCart = (id) => {
     axiosSecure
-      .patch(`/users/addtocart/${id}`)
+      .patch(`/users/addtocart/${id}`, { quantity: 1 })
       .then((res) => {
         console.log(res.data);
       })
