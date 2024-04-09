@@ -21,6 +21,7 @@ body {
   background: #060113;
   /* overflow: hidden; */
   font-family: "Inter", sans-serif;
+  /* font-size: calc(16px + 6 * ((100vw - 320px) / 680)); */
   box-sizing: border-box;
   @apply scroll-smooth snap-y;
 

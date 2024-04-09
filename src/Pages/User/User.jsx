@@ -8,6 +8,12 @@ import { Link, useLoaderData } from "react-router-dom";
 import { BsFacebook } from "react-icons/bs";
 import { FaInstagram, FaTwitter } from "react-icons/fa6";
 import { TbMoodSadSquint } from "react-icons/tb";
+import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosNoAuth from "../../hooks/useAxiosNoAuth";
+import Swal from "sweetalert2";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const topBarItems = (
   <>
@@ -21,7 +27,63 @@ const topBarItems = (
 );
 
 const User = () => {
-  const userProfile = useLoaderData();
+  // const userProfile = useLoaderData();
+  const [userProfile, setUserProfile] = useState(useLoaderData());
+  const [refetch, setRefetch] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  // get axiosSecure and axiosNoAuth form hook
+  const axiosSecure = useAxiosSecure();
+  const axiosNoAuth = useAxiosNoAuth();
+
+  // fetch user profile
+  useEffect(() => {
+    if (refetch) {
+      axiosSecure.get("users/profile").then((res) => {
+        setUserProfile(res.data);
+        setRefetch(false);
+      });
+    }
+  }, [axiosSecure, refetch, userProfile]);
+
+  const imageUploadHandler = (imageInfo) => {
+    // console.log(imageInfo);
+    let formdata = new FormData();
+    formdata.append("image", imageInfo.displayImage[0]);
+    // do something with the image information
+    axiosNoAuth
+      .post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_APIKEY
+        }`,
+        formdata
+      )
+      .then((res) => {
+        const displayPicture = res.data.data.display_url;
+        axiosSecure
+          .patch("/users/updateuser", { displayPicture })
+          .then((res) => {
+            if (res.data.success) {
+              reset();
+              document.getElementById("changeImageModal").close();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Display picture updated successfully!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              setRefetch(true);
+            }
+          });
+      });
+  };
   return (
     <div className="min-h-screen p-4">
       {/* user profile */}
@@ -39,8 +101,9 @@ const User = () => {
             <div className="infoCard flex flex-col items-center h-full md:h-full w-full">
               {/* user's profile picture */}
               <LazyLoadImage
-                className="w-36 h-36 object-cover aspect-square rounded-full"
-                src="https://i.ibb.co/SybN6T8/2017-emmastone-4600355e19cd442db005285754237096.webp"
+                className="w-36 h-36 object-cover aspect-square border-2 rounded-full"
+                // src="https://i.ibb.co/SybN6T8/2017-emmastone-4600355e19cd442db005285754237096.webp"
+                src={userProfile?.displayPicture}
                 placeholderSrc="/images/lazy_load/user.png"
                 loading="lazy"
                 alt="Display picture"
@@ -64,7 +127,12 @@ const User = () => {
                   >
                     Edit Profile
                   </Link>
-                  <button className="flex-grow btn btn-outline border-blue-500 text-blue-500 hover:btn-primary">
+                  <button
+                    className="flex-grow btn btn-outline border-blue-500 text-blue-500 hover:btn-primary"
+                    onClick={() =>
+                      document.getElementById("changeImageModal").showModal()
+                    }
+                  >
                     Change Picture
                   </button>
                 </div>
@@ -74,7 +142,7 @@ const User = () => {
                 <h1 className="mb-5 !text-2xl border-b border-gray-400 pb-3">
                   Social Links
                 </h1>
-                <table className="table">
+                <table className="table table-xs">
                   <tbody>
                     {/* Facebook */}
                     <tr>
@@ -199,6 +267,40 @@ const User = () => {
           </div>
         </div>
       </div>
+
+      {/* image upload modal */}
+      <dialog id="changeImageModal" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Change Display Picture!</h3>
+          <p className="py-4 text-sm">
+            Please make sure that the aspect ratio of the image is 1:1. It will
+            be displayed on your profile page as a circle with a border around
+            it.
+          </p>
+          <form className="w-full" onSubmit={handleSubmit(imageUploadHandler)}>
+            <input
+              type="file"
+              className="file-input file-input-bordered file-input-info w-full "
+              {...register("displayImage", { required: true })}
+            />
+            <div className="modal-action">
+              <button className="btn btn-info" type="submit">
+                {" "}
+                Save
+              </button>
+              <button
+                className="btn"
+                type="button"
+                onClick={() =>
+                  document.getElementById("changeImageModal").close()
+                }
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+      </dialog>
     </div>
   );
 };

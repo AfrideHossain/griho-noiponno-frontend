@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingCart, HiOutlineUserCircle } from "react-icons/hi";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContextProvider";
+import { useState } from "react";
+import { useEffect } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Navitems = (
   <>
@@ -39,6 +42,16 @@ const Navbar = () => {
       navigate("/auth/signin");
     });
   };
+
+  const axiosSecure = useAxiosSecure();
+
+  // fetch user's profile
+  const [profile, setProfile] = useState();
+  useEffect(() => {
+    axiosSecure.get("/users/profile").then((res) => {
+      setProfile(res.data);
+    });
+  }, [axiosSecure]);
 
   return (
     <>
@@ -102,7 +115,7 @@ const Navbar = () => {
                         className="btn btn-ghost btn-circle"
                       >
                         <div className="indicator">
-                          <Link to={"dashboard/cart"}>
+                          <Link to={"/dashboard/cart"}>
                             <HiOutlineShoppingCart className="w-6 h-6" />
                           </Link>
                           {/* <span className="badge badge-sm indicator-item">
@@ -133,7 +146,15 @@ const Navbar = () => {
                     alt="Tailwind CSS Navbar component"
                     src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                   /> */}
-                          <HiOutlineUserCircle className="w-full h-full" />
+                          {/* <HiOutlineUserCircle className="w-full h-full" /> */}
+                          {profile?.displayPicture ? (
+                            <img
+                              alt="Tailwind CSS Navbar component"
+                              src={profile.displayPicture}
+                            />
+                          ) : (
+                            <HiOutlineUserCircle className="w-full h-full" />
+                          )}
                         </div>
                       </div>
                       <ul

@@ -13,9 +13,9 @@ const Checkout = () => {
     console.log("Submitted Data", checkOutInfo);
   };
   return (
-    <div className="w-full min-h-screen flex flex-col justify-center items-center">
+    <div className="w-full min-h-screen flex flex-col justify-center items-center p-4">
       <form
-        className="bg-gray-800 text-white p-8 md:w-3/4 rounded"
+        className="bg-gray-800 text-white p-8 md:w-3/4 border rounded my-auto"
         onSubmit={handleSubmit(onSubmitHandler)}
       >
         <h1 className="mb-5 text-3xl text-center font-semibold">Checkout</h1>
@@ -103,9 +103,9 @@ const Checkout = () => {
 
         <button
           type="submit"
-          className="bg-gray-900 text-gray-400 font-medium p-3 w-full rounded hover:bg-slate-950"
+          className="bg-gray-900 text-gray-300 font-medium p-3 w-full rounded hover:bg-slate-950"
         >
-          Confirm Order
+          Place Order
         </button>
       </form>
     </div>

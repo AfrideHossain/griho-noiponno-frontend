@@ -2,7 +2,7 @@
 // import { CartContext } from "./CartContext"; // Replace with your cart context path
 
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Cart = () => {
@@ -122,9 +122,9 @@ const Cart = () => {
                 0
               )}
             </span>
-            <button type="button" className="btn btn-primary">
+            <Link to={"/dashboard/checkout"} className="btn btn-primary">
               Checkout
-            </button>
+            </Link>
           </div>
         )}
       </div>

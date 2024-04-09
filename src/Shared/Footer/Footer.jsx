@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="footer p-10 bg-base-200 text-base-content mt-24">
+    <footer className="footer p-10 bg-base-200 text-base-content">
       <aside>
         <img src="/images/logo/logo.png" className="w-20 mb-5" alt="" />
         <h1 className="text-2xl font-bold">Griho Noipunno</h1>
