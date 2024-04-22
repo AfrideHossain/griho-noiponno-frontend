@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   // const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
@@ -28,13 +29,27 @@ const Cart = () => {
   ] */
 
   const [cartItems, setCartItems] = useState([]);
-  const cart = useLoaderData();
+  const [cart, setCart] = useState(useLoaderData());
 
   // get axios
   const axiosSecure = useAxiosSecure();
 
+  // get cart items if refetch is true
+  const [refetch, setRefetch] = useState(false);
   useEffect(() => {
-    // console.log(cart);
+    if (refetch) {
+      axiosSecure
+        .get("users/cart")
+        .then((res) => {
+          setCart(res.data);
+          setRefetch(false);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [axiosSecure, refetch]);
+
+  useEffect(() => {
+    console.log(cart);
     const cartArr = cart.cart;
     const newCartItems = [];
     // console.log("cart array => ", cartArr);
@@ -47,12 +62,25 @@ const Cart = () => {
         setCartItems([...newCartItems]);
       });
     });
+    console.log("new cart with details", newCartItems);
     // .catch((err) => console.error(err));
   }, [axiosSecure, cart]);
 
-  // const handleRemoveItem = (id) => {
-  //   removeFromCart(id);
-  // };
+  const handleRemoveItem = (id, product) => {
+    // console.log(`${id} will be removed`);
+    axiosSecure.delete(`/users/removefromcart/${id}`).then((res) => {
+      if (res.data.success) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${product} has been removed from your cart`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setRefetch(true);
+      }
+    });
+  };
 
   // const handleQuantityChange = (event, id) => {
   //   const newQuantity = parseInt(event.target.value, 10);
@@ -62,8 +90,10 @@ const Cart = () => {
     <div className="w-full min-h-screen flex justify-center items-center">
       <div className="w-full bg-gray-800 rounded-lg shadow-md px-4 py-6">
         <h2 className="text-xl text-white font-medium mb-4">Shopping Cart</h2>
-        {cartItems?.length === 0 ? (
-          <p className="text-gray-400 text-center">Your cart is empty.</p>
+        {cart?.cart?.length === 0 ? (
+          <p className="text-gray-400 text-center text-2xl font-semibold">
+            Your cart is empty.
+          </p>
         ) : (
           <ul className="list-none space-y-4">
             {cartItems?.map((item) => (
@@ -88,7 +118,8 @@ const Cart = () => {
                 </div>
                 <div className="w-full md:w-auto flex flex-col gap-2 md:flex-row items-end space-x-4">
                   <span className="text-lg text-white font-medium">
-                    ${parseFloat(item.productPrice * item.quantity).toFixed(2)}$
+                    {parseFloat(item.productPrice * item.quantity).toFixed(2)}{" "}
+                    Tk
                     {/* {item.productPrice * item.quantity} */}
                   </span>
                   <div className="flex items-center gap-4">
@@ -102,7 +133,9 @@ const Cart = () => {
                     <button
                       type="button"
                       className="btn btn-sm btn-error"
-                      // onClick={() => handleRemoveItem(item.id)}
+                      onClick={() =>
+                        handleRemoveItem(item._id, item.productName)
+                      }
                     >
                       Remove
                     </button>
@@ -112,17 +145,23 @@ const Cart = () => {
             ))}
           </ul>
         )}
-        {cartItems.length > 0 && (
+        {cart?.cart.length > 0 && (
           <div className="mt-4 flex justify-between items-center">
             <span className="text-sm text-gray-400">Total:</span>
             <span className="text-lg text-white font-medium">
-              $
-              {cartItems.reduce(
-                (total, item) => total + item.productPrice * item.quantity,
-                0
-              )}
+              {cartItems
+                .reduce(
+                  (total, item) => total + item.productPrice * item.quantity,
+                  0
+                )
+                .toFixed(2)}{" "}
+              Tk
             </span>
-            <Link to={"/dashboard/checkout"} className="btn btn-primary">
+            <Link
+              to={"/dashboard/checkout"}
+              state={cartItems}
+              className="btn btn-primary"
+            >
               Checkout
             </Link>
           </div>

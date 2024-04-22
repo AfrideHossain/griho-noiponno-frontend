@@ -18,6 +18,7 @@ import SecureAdminRoute from "../secureRoutes/SecureAdminRoute";
 import EditUser from "../Pages/User/EditUser/EditUser";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Checkout from "../Pages/User/Checkout/Checkout";
+import OrderDetails from "../Pages/Admin/OrderDetails/OrderDetails";
 const axiosSecure = useAxiosSecure();
 
 const router = createBrowserRouter([
@@ -132,6 +133,14 @@ const router = createBrowserRouter([
         element: (
           <SecureAdminRoute>
             <AddProduct />
+          </SecureAdminRoute>
+        ),
+      },
+      {
+        path: "order/:orderId",
+        element: (
+          <SecureAdminRoute>
+            <OrderDetails />
           </SecureAdminRoute>
         ),
       },

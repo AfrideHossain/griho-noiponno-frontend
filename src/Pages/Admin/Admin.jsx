@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import OrderList from "./OrderList/OrderList";
 import ProductTable from "./ProductTable/ProductTable";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -46,6 +46,11 @@ const Admin = () => {
       setLoading(false);
     });
   }, [axiosSecure]);
+
+  // socket related things
+  // const { socket } = useContext(SocketContext);
+
+  // console.log(socket);
 
   return (
     <div className="w-full min-h-screen">

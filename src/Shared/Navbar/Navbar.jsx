@@ -6,6 +6,8 @@ import { AuthContext } from "../../context/AuthContextProvider";
 import { useState } from "react";
 import { useEffect } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { SocketContext } from "../../context/SocketContextProvider";
+import { HiOutlineClipboardList } from "react-icons/hi";
 
 const Navitems = (
   <>
@@ -36,6 +38,9 @@ const AdminRoutes = (
 const Navbar = () => {
   // destructure user from context
   const { user, userRole, logOutUser } = useContext(AuthContext);
+  // destructure pending order from socket context
+  const { pendingOrders } = useContext(SocketContext);
+
   const navigate = useNavigate();
   const handleSignout = () => {
     logOutUser().then(() => {
@@ -96,6 +101,20 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="navbar-end w-auto md:w-1/2">
+              {userRole === "admin" && (
+                <div className="btn btn-ghost btn-circle" role="button">
+                  <div className="indicator">
+                    <Link to={"/admin"} className="flex items-start">
+                      <HiOutlineClipboardList className="w-6 h-6" />
+                      {pendingOrders.length > 0 && (
+                        <span className="badge badge-info badge-sm relative -top-2">
+                          {pendingOrders.length}
+                        </span>
+                      )}
+                    </Link>
+                  </div>
+                </div>
+              )}
               {!user ? (
                 <>
                   <Link className="btn btn-primary" to={"auth/signin"}>

@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useContext } from "react";
+import { SocketContext } from "../../../context/SocketContextProvider";
+import Swal from "sweetalert2";
 const Checkout = () => {
   const userdata = useLoaderData();
   //   console.log(userdata);
@@ -9,8 +13,53 @@ const Checkout = () => {
     formState: { errors },
   } = useForm();
 
+  // get axiosSecure
+  const axiosSecure = useAxiosSecure();
+
+  // get socket
+  const { socket } = useContext(SocketContext);
+
+  // use location hook
+  const location = useLocation();
+  const cart = location.state;
+
+  // on submit handler
+
   const onSubmitHandler = (checkOutInfo) => {
     console.log("Submitted Data", checkOutInfo);
+    const { fullName, phone, email, street, district, division, zip } =
+      checkOutInfo;
+    const orderedDate = Date.now();
+    axiosSecure
+      .post("/neworder", {
+        userid: userdata._id,
+        fullName,
+        phone,
+        email,
+        street,
+        district,
+        division,
+        zip,
+        cart,
+        status: "pending",
+        orderedDate,
+      })
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `Your order successfully placed.`,
+            html: `<p>Your order id is: <span class="font-bold">${res.data.insertedId}</span></p><p>We will contact you as soon as possible.</p>`,
+            showConfirmButton: false,
+            timer: 5000,
+          });
+        }
+      });
+
+    socket.on("neworder", (res) => {
+      console.log(res);
+    });
   };
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center p-4">
