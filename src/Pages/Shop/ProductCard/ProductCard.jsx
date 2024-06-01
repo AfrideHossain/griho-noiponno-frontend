@@ -1,8 +1,32 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { CiStar } from "react-icons/ci";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ProductCard = ({ product }) => {
+  // get axiosSecure
+  const axiosSecure = useAxiosSecure();
+  // handlers
+  const handleAddToCart = (id) => {
+    axiosSecure
+      .patch(`/users/addtocart/${id}`, { quantity: 1 })
+      .then((res) => {
+        const data = res.data;
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${product.productName} is added to your cart`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   return (
     <div className="bg-white bg-opacity-15 card card-compact">
       <figure>
@@ -33,7 +57,12 @@ const ProductCard = ({ product }) => {
           <Link className="btn btn-outline" to={`/product/${product._id}`}>
             View Details
           </Link>
-          <button className="btn btn-primary">Add To Cart</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleAddToCart(product._id)}
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
     </div>

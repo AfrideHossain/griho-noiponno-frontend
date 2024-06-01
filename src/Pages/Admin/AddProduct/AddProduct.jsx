@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAxiosNoAuth from "../../../hooks/useAxiosNoAuth";
 const AddProduct = () => {
   // destructure essentials from useFork
   const {
@@ -14,20 +15,36 @@ const AddProduct = () => {
 
   // destructure axiosSecure
   const axiosSecure = useAxiosSecure();
+  const axiosNoAuth = useAxiosNoAuth();
   const submitHandler = (data) => {
     // console.log(data);
-    axiosSecure.post("/products/addproduct", data).then((res) => {
-      if (res.data.insertedId) {
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${data.productName} Added`,
-          showConfirmButton: false,
-          timer: 2000,
+    const formData = new FormData();
+    formData.append("image", data.productImage[0]);
+    // uploading image to imgbb
+    axiosNoAuth
+      .post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_APIKEY
+        }`,
+        formData
+      )
+      .then((res) => {
+        const productImage = res.data.data.display_url;
+        data.productImage = productImage;
+        // console.log(data);
+        axiosSecure.post("/products/addproduct", data).then((res) => {
+          if (res.data.insertedId) {
+            reset();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${data.productName} Added`,
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }
         });
-      }
-    });
+      });
   };
 
   return (
@@ -98,9 +115,14 @@ const AddProduct = () => {
           <label htmlFor="image" className="text-sm text-gray-300">
             Image URL
           </label>
-          <input
+          {/* <input
             type="text"
             className="w-full px-3 py-2 rounded-md bg-gray-600 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500"
+            {...register("productImage", { required: true })}
+          /> */}
+          <input
+            type="file"
+            className="file-input rounded-md bg-gray-600 border border-transparent focus:outline-none focus:ring-1 focus:ring-blue-500 w-full"
             {...register("productImage", { required: true })}
           />
         </div>

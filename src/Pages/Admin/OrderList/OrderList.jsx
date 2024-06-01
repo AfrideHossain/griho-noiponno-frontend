@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { SocketContext } from "../../../context/SocketContextProvider";
 
 const OrderList = () => {
   // orders state
-  const [orders, setOrders] = useState([]);
+  // const [orders, setOrders] = useState([]);
+  // get orders states form socket context
+  const { orders, setOrders } = useContext(SocketContext);
   // get axiosSecure
   const axiosSecure = useAxiosSecure();
   // load orders with axiosSecure
@@ -18,7 +21,7 @@ const OrderList = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [axiosSecure]);
+  }, [axiosSecure, setOrders]);
   // delete order
 
   // update order

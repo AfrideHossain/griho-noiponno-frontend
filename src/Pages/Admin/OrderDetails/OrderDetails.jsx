@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
@@ -10,6 +10,9 @@ const OrderDetails = () => {
 
   // get axiosSecure
   const axiosSecure = useAxiosSecure();
+
+  // use useNavigate hook
+  const navigate = useNavigate();
 
   // get order with axiosSecure and set order state
   useEffect(() => {
@@ -28,12 +31,13 @@ const OrderDetails = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: `${res.data.msg}`,
+            title: `Order has been ${status}.`,
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2000,
           }).then(() => {
             axiosSecure.get(`/order/${orderId}`).then((res) => {
               setOrder(res.data);
+              navigate("/admin");
             });
           });
         }

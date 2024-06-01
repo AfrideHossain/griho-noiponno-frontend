@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import Loading from "../../Shared/Loading/Loading.jsx";
 
 const ProductDetails = () => {
   // get params from url
@@ -47,39 +48,45 @@ const ProductDetails = () => {
   };
   return (
     <div className="max-w-7xl mx-auto mt-20 p-4">
-      <div className="grid md:grid-cols-2 gap-16">
-        <img
-          // src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          src={product?.productImage}
-          alt=""
-          className="rounded-md"
-        />
-        <div className="space-y-5">
-          <h1 className="text-3xl font-bold text-slate-200">
-            {product?.productName}
-          </h1>
-          <p className="flex gap-2 items-center">
-            <CiStar className="w-6 h-6" /> 4.7
-          </p>
-          <p className="text-base font-medium text-gray-500">
-            {product?.productDescription}
-          </p>
-          <p className="text-lg font-semibold">
-            Price : <span>{product?.productPrice}</span> Tk
-          </p>
-          <div className="flex justify-between items-center">
-            <button className="flex items-center gap-2">
-              <CiHeart className="w-6 h-6" /> 200
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => handleAddToCart(product._id)}
-            >
-              Add to cart
-            </button>
+      {loading ? (
+        <div className="w-full flex justify-center items-center">
+          <Loading />
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 gap-16">
+          <img
+            // src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src={product?.productImage}
+            alt=""
+            className="rounded-md"
+          />
+          <div className="space-y-5">
+            <h1 className="text-3xl font-bold text-slate-200">
+              {product?.productName}
+            </h1>
+            <p className="flex gap-2 items-center">
+              <CiStar className="w-6 h-6" /> 4.7
+            </p>
+            <p className="text-base font-medium text-gray-500">
+              {product?.productDescription}
+            </p>
+            <p className="text-lg font-semibold">
+              Price : <span>{product?.productPrice}</span> Tk
+            </p>
+            <div className="flex justify-between items-center">
+              <button className="flex items-center gap-2">
+                <CiHeart className="w-6 h-6" /> 200
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleAddToCart(product._id)}
+              >
+                Add to cart
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {/* review input section */}
       <div className="mt-20">
         <div className="w-full">

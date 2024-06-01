@@ -2,17 +2,22 @@ import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard/ProductCard";
 import SearchBox from "./SearchBox/SearchBox";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../Shared/Loading/Loading";
 // import SideBar from "./SideBar/SideBar";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
+  // loading state
+  const [loading, setLoading] = useState(false);
   // get axiosSecure to send request
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
+    setLoading(true);
     axiosSecure.get("/products/allproducts").then(({ data }) => {
       console.log("data", data);
       setProducts(data);
+      setLoading(false);
     });
   }, [axiosSecure]);
   return (
@@ -33,6 +38,11 @@ const Shop = () => {
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
+        {loading && (
+          <div className="p-4 mx-auto">
+            <Loading />
+          </div>
+        )}
       </div>
       <div className="mt-10 flex justify-center">
         <button className="btn btn-primary px-10">See more</button>

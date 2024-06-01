@@ -15,6 +15,14 @@ const ErrorElement = () => {
         <Link to="/" className="btn btn-lg bg-purple-500 px-10 text-white mt-8">
           Back to homepage
         </Link>
+        <div className="flex gap-2 justify-center items-center my-4 w-full">
+          <hr className="border border-gray-500 w-full" />
+          <p className="text-lg font-semibold">OR</p>
+          <hr className="border border-gray-500 w-full" />
+        </div>
+        <p className="px-10 py-4 rounded-full bg-slate-700 font-semibold text-white">
+          Try Reload Manually
+        </p>
       </div>
     </div>
   );

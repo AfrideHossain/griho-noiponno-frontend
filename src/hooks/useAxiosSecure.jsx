@@ -12,8 +12,10 @@ const useAxiosSecure = () => {
 
   // write code for intercept request and response
   axiosSecure.interceptors.request.use((config) => {
+    config.headers["Access-Control-Allow-Origin"] = "*";
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
+      // config.headers["Accept"] = "allow-"
       // config.headers.Authorization = `Bearer ${token}`;
     }
     return config;

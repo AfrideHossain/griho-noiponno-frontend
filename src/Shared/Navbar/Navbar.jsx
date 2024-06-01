@@ -90,6 +90,7 @@ const Navbar = () => {
               <div className="flex-1 px-2 mx-2">
                 <Link className="btn btn-ghost text-xl" to="/">
                   Griho Noipunno
+                  <p className="text-base font-normal">v1.0</p>
                 </Link>
               </div>
             </div>

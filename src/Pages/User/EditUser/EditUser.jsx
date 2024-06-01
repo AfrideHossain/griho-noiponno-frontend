@@ -10,8 +10,12 @@ import { FaInstagram, FaTwitter } from "react-icons/fa6";
 import { TbMoodSadSquint } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useState } from "react";
+import Loading from "../../../Shared/Loading/Loading";
 const EditUser = () => {
   const userProfile = useLoaderData();
+  // loading state
+  const [loading, setLoading] = useState(false);
   // destructure essentials from useForm
   const {
     register,
@@ -24,17 +28,26 @@ const EditUser = () => {
 
   // write function for handling form submission
   const submitHandler = (data) => {
+    setLoading(true);
     axiosSecure
       .patch("/users/updateuser", data)
       .then((res) => {
         console.log(res);
+        setLoading(false);
       })
       .catch((err) => {
         console.error(err);
+        setLoading(false);
       });
   };
   return (
-    <div className="min-h-screen p-4">
+    <div className="min-h-screen p-4 relative">
+      {/* show loading */}
+      {loading && (
+        <div className="absolute top-0 left-0 w-full h-screen flex justify-center items-center bg-black bg-opacity-50 backdrop-blur-md z-[999]">
+          <Loading />
+        </div>
+      )}
       {/* user profile */}
       <form className="" onSubmit={handleSubmit(submitHandler)}>
         {/* profile information */}

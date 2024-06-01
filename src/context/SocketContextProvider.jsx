@@ -12,6 +12,9 @@ const SocketContextProvider = ({ children }) => {
 
   // initialize pending orders state
   const [pendingOrders, setPendingOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
+  // intitializes user state
+  const [userState, setUserState] = useState([]);
 
   // use socket hook
   const socket = useSocket();
@@ -24,6 +27,7 @@ const SocketContextProvider = ({ children }) => {
       axiosSecure.get("/users/profile").then((res) => {
         // console.log(res.data); //
         const userData = res.data;
+        setUserState(userData);
         if (userData.role === "admin") {
           // console.log("inside useeffect");
           socket.connect();
@@ -37,12 +41,20 @@ const SocketContextProvider = ({ children }) => {
   }, [axiosSecure, socket, user]);
   //fetch all pending orders
   useEffect(() => {
-    axiosSecure.get("/pendingorders").then((res) => {
-      setPendingOrders(res.data);
-    });
-  }, [axiosSecure]);
+    if (userState.role === "admin") {
+      axiosSecure.get("/pendingorders").then((res) => {
+        setPendingOrders(res.data);
+      });
+    }
+  }, [axiosSecure, orders, userState]);
   // context values
-  const socketContextValue = { socket, pendingOrders };
+  const socketContextValue = {
+    socket,
+    pendingOrders,
+    setPendingOrders,
+    orders,
+    setOrders,
+  };
 
   return (
     <SocketContext.Provider value={socketContextValue}>

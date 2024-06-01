@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // import react hook form
@@ -9,7 +10,9 @@ import "../auth.css";
 import ValidationSchema from "../validator/YupUniversalValidator";
 import useContextHook from "../../../hooks/useContextHook";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosNoAuth from "../../../hooks/useAxiosNoAuth";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
+import { GoVerified } from "react-icons/go";
 
 const SignUp = () => {
   const {
@@ -23,8 +26,12 @@ const SignUp = () => {
   const navigate = useNavigate();
   // set previous location or home as default
   const from = location?.state?.from?.pathname || "/";
+
   // use axiosSecure
   const axiosSecure = useAxiosSecure();
+
+  // useAxiosNoAuth
+  const axiosNoAuth = useAxiosNoAuth();
 
   // destructure sign up functions  from usecontexthook
   const { signUpWithEmailAndPass, signInWithGoogle } = useContextHook();
@@ -41,7 +48,7 @@ const SignUp = () => {
           });
         // upadate display name new user's information to database
         updateProfile(result.user, { displayName: username }).then(() => {
-          axiosSecure
+          axiosNoAuth
             .post("/createuser", {
               username,
               email,
@@ -66,19 +73,14 @@ const SignUp = () => {
     signInWithGoogle()
       .then((result) => {
         const userDetails = result.user;
-        // send verification email
-        sendEmailVerification(result.user)
-          .then(() => {})
-          .catch((err) => {
-            console.error(err.message);
-          });
         // add new user's information to database
-        axiosSecure
+        axiosNoAuth
           .post("/createuser", {
             username: userDetails.displayName,
             email: userDetails.email,
             role: "user",
             cart: [],
+            // GoVerified
           })
           .then(() => {
             navigate(from, { replace: true });

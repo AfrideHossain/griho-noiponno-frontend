@@ -17,8 +17,7 @@ const Checkout = () => {
   const axiosSecure = useAxiosSecure();
 
   // get socket
-  const { socket } = useContext(SocketContext);
-
+  const { socket, setPendingOrders } = useContext(SocketContext);
   // use location hook
   const location = useLocation();
   const cart = location.state;
@@ -57,8 +56,11 @@ const Checkout = () => {
         }
       });
 
-    socket.on("neworder", (res) => {
-      console.log(res);
+    socket.on("neworder", () => {
+      console.log("I got neworder event");
+      axiosSecure.get("/pendingorders").then((res) => {
+        setPendingOrders(res.data);
+      });
     });
   };
   return (

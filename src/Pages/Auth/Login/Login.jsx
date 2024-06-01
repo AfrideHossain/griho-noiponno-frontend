@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "../auth.css";
 import ValidationSchema from "../validator/YupUniversalValidator";
 import useContextHook from "../../../hooks/useContextHook";
+import useAxiosNoAuth from "../../../hooks/useAxiosNoAuth";
 
 const Login = () => {
   // initializing react hook form
@@ -20,6 +21,8 @@ const Login = () => {
   // use navigation and location hooks
   const location = useLocation();
   const navigate = useNavigate();
+
+  const axiosNoAuth = useAxiosNoAuth();
   // set previous location or home as default
   const from = location?.state?.from?.pathname || "/";
 
@@ -42,7 +45,24 @@ const Login = () => {
   const googleLogin = () => {
     signInWithGoogle()
       .then((result) => {
-        // console.log(result);
+        const userDetails = result.user;
+        console.log(result);
+        axiosNoAuth
+          .post("/createuser", {
+            username: userDetails.displayName,
+            email: userDetails.email,
+            role: "user",
+            cart: [],
+            // GoVerified
+          })
+          // eslint-disable-next-line no-unused-vars
+          .then((res) => {
+            if (!res.newUser) {
+              console.log("Existing user");
+            } else {
+              console.log("New User");
+            }
+          });
         navigate(from, { replace: true });
       })
       .catch((err) => {
